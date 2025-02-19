@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Uploading to GitHub just for review:
+1. Frontend:
+   - Pages.
+   - Components:
+       (Like in React, we can import components or predefined parts into any page, for example, a topbar or footer.)
+   - Public:
+       (We can place general images here, no sensitive data.)
+
+2. Backend:
+   - I added a file named "translator.js" which uses the Azure Microsoft Translator API.
+     When the user clicks one of the four languages - English, Hebrew, Arabic, or Russian, it will automatically translate the entire site into the selected language.
+-->
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+
+
+  <style>
+
+  </style>
+
+  <body>
+
+
+
+
+    <!------------- TOPBAR --------------->
+    <div class="topbar" id="topbar"> </div>
+    <div class="line-temp"></div>
+
+    <!------------- SECOND TOPBAR --------------->
+    <div class="second-topbar" id="second-topbar"> </div>
+    <div class="line-temp"></div>
+
+ 
+    <div class="main-container">
+
+          <!------------- SECTIONS/PARTS --------------->
+          <div class="gradient-wrapper">
+          <div class="section-section1" id="section-section1"></div>
+        </div>
+          <div class="section-section2" id="section-section2"></div>
+          <div class="section-section3" id="section-section3"></div>
+          <div id="section-section4"></div>
+          <div id="section-section5"></div>
+          <div id="section-section6"></div>
+          <div id="section-section7"></div>
+          <!------------- FOOTER --------------->
+          <div class="footer" id="footer">
+        
+    </div>
+
+
+     <!------------- SIDEBAR --------------->
+    <div class="sidebar" id="sidebar"></div>
+    <script src="../components/sidebar.js"></script>
+
+    <script>
+
+      let path_components = "components/";
+      let sections_folder = "main_sections/";
+
+
+    // ---------------- IMPORT SECTIONS/PARTS ------------
+    function load_sections(){
+            let arr_sections = ["1","2","3","4","5","6","7"]
+            for(let i=0;i<arr_sections.length;i++){
+              let path = "../" + path_components + sections_folder + "s" + arr_sections[i] + ".html";
+              let name = "section-section" + arr_sections[i];
+              import_html(path,name);
+          }
+    }
+
+
+     // ------------------- IMPORT COMPONENTS --------------------
+     function load_components(){
+          let arr_components = ["topbar","footer","sidebar","second-topbar"]
+          for(let i=0;i<arr_components.length;i++){
+                  let path = "../" + path_components + arr_components[i] + ".html";
+                  let name = arr_components[i];
+                  import_html(path,name);
+              }
+    }
+
+    // ----- helper function to imports 
+    function import_html(path,name){
+      fetch(path)
+      .then((response) => response.text())
+      .then((html) => {
+        document.getElementById(name).innerHTML = html;
+
+      }
+    );
+    }
+
+
+    load_sections()
+    load_components()
+   
+    </script>
+
+    <!-- Load the translator script -->
+    <script src="../../backend/translator.js"></script>
+  </body>
+</html>
