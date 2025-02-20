@@ -9,4 +9,4 @@ const appointmentSchema = new mongoose.Schema({
     patient: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null }, 
 });
 
-module.exports = mongoose.model('Appointment', appointmentSchema);
+module.exports = mongoose.model('appointment', appointmentSchema);
