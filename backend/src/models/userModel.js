@@ -4,7 +4,7 @@ const Role = require("./roleModel");
 
 const UserSchema = new mongoose.Schema({
   idPerson: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
     maxlength: 10,
@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
   roleId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Role,
+    require: true,
   },
 
   medicalInfoId: { type: mongoose.Schema.Types.ObjectId, ref: "MedicalRecord" }, //creat medical record
@@ -49,7 +50,7 @@ UserSchema.set("toJSON", {
   transform: function (doc, ret, options) {
     if (ret.roleId) {
       if (options && options.roleAsName) {
-        ret.role = ret.roleId.name;
+        ret.role = ret.roleId.roleName;
       } else {
         ret.role = ret.roleId;
       }
@@ -66,7 +67,7 @@ UserSchema.set("toJSON", {
 UserSchema.pre("save", async function (next) {
   try {
     if (!this.roleId) {
-      const defaultRole = await Role.findOne({ name: "user" });
+      const defaultRole = await Role.findOne({ roleName: "user" });
       if (!defaultRole)
         return next(new Error('Default role "user" not found.'));
       this.roleId = defaultRole._id;

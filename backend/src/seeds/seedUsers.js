@@ -17,8 +17,10 @@ async function seedUsers() {
   const existingAdmin = await User.findOne({ email: 'admin@example.com' });
   if (!existingAdmin) {
     const user = await User.create({
-      fName: "Admin",
-      lName: "Admin",
+      Fname: "Admin",
+      Lname: "Admin",
+      idPerson: "123456789",
+      phone: "1234567891234",
       email: 'admin@example.com',
       password: 'AdminPass123',
       roleId: adminRole._id,

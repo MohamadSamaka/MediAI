@@ -3,7 +3,7 @@ const JsonedResponseError = require("../errors/JsonedResponseError");
 
 const validateRoleCreation = (userData) => {
   const schema = Joi.object({
-    name: Joi.string().min(3).max(30).required(),
+    roleName: Joi.string().min(3).max(30).required(),
   }).strict();
   const { error } = schema.validate(userData);
   if (error) 
@@ -12,7 +12,7 @@ const validateRoleCreation = (userData) => {
 
 const validateRoleUpdate = (userData) => {
     const schema = Joi.object({
-        name: Joi.string().min(3).max(30).required(),
+        roleName: Joi.string().min(3).max(30).required(),
     }).strict();
     const { error } = schema.validate(userData);
     if (error) 

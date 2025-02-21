@@ -15,18 +15,6 @@ const {
 const RefreshTokenRepository = require("../repositories/refreshTokenRepistory");
 
 class AuthService {
-  async registerUser(userData) {
-    validateUserRgisteration(userData);
-    // Check if user already exists
-    const existingUser = await getUserByEmail(userData.email);
-    if (existingUser) {
-      throw new JsonedResponseError("User already exists", 409);
-    }
-    const createdUser = await createUser(userData);
-    // Create the user
-    return createdUser._id;
-  }
-  
   async loginUser(userLoginData, ip, userAgent) {
     // Validate input
     validateUserLogin(userLoginData);
@@ -34,11 +22,11 @@ class AuthService {
     const { email, password } = userLoginData;
 
     const user = await getUserByEmail(email);
-
     if (!user || !(await user.validatePassword(password))) {
       throw new Error("Invalid email or password");
     }
     const jsonedUser = user.toJSON({ roleAsName: true });
+
     const accessToken = accessTokenGenerator(jsonedUser);
     const refreshToken = refreshTokenGenerator(jsonedUser);
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);

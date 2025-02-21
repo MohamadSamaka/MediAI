@@ -6,7 +6,10 @@ class UserController {
       const userId = await userService.createUser(req.body);
       res.status(201).json({ message: "User created successfully", userId });
     } catch (err) {
-      res.status(err.statusCode).json({ error: err.message });
+      return res.status(err.statusCode).json({
+        success: false,
+        message: err.message,
+      });
     }
   }
   

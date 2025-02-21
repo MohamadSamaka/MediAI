@@ -1,16 +1,11 @@
-const medicalRec = require("../models/medicalRecordModel");
+const medicalRecModel = require("../models/medicalRecordModel");
 
 class MedicalRecRepository {
-
-    async getPrescriptions(userId){
-        //this returns all of the medical record we need the prescreption
-       const medicRec= await medicalRec.findOne({userId});
-       return medicRec.prescriptions;//is this the right way? 
-       
-    }
-
-
+  async getPrescriptions(userId) {
+    //this returns all of the medical record we need the prescreption
+    const prescriptions = await medicalRecModel.findOne({ userId }, 'prescriptions');
+    return prescriptions;
+  }
 }
-  
 
-module.exports = new MedicalRecRepository()
+module.exports = new MedicalRecRepository();

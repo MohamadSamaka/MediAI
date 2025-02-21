@@ -1,4 +1,4 @@
-const medicalRecService = require("../services/medicalRecServic.js");
+const medicalRecService = require("../services/medicalRecService");
 
 //all get and post functions
 
@@ -7,45 +7,21 @@ const medicalRecService = require("../services/medicalRecServic.js");
 //doctors dont need to see future appointments of user
 
 class MedicalRecController {
-    async getPrescriptions(req, res) {
-        try {
-            const userIdObj= req.user.id;
-          const prescriptions = await medicalRecService.getPrescriptions(userIdObj);
-          return res.status(200).json({
-            success: true,
-            data: prescriptions,
-          });
-        } catch (error) {
-          return res.status(400).json({
-            success: false,
-            message: error.message,
-          });
-        }
-      }
-    
-
+  async getPrescriptions(req, res) {
+    try {
+      const userIdObj = req.user.id;
+      const prescriptions = await medicalRecService.getPrescriptions(userIdObj);
+      return res.status(200).json({
+        success: true,
+        data: prescriptions,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
 }
 
-module.exports = new MedicalRecController()
-
-/*
- userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  prescriptions: [
-    {
-      medication: String,
-      dosage: String,
-      frequency: String,
-      prescribed_by: { type: mongoose.Schema.Types.ObjectId, ref: "Doctor" }, // Doctor ID
-      date_prescribed: { type: Date, default: Date.now },
-      notes: String,
-    },
-  ],
-
-  diagnosis: [
-    {
-      condition: String,
-      diagnosed_by: { type: mongoose.Schema.Types.ObjectId, ref: "Doctor" }, // Doctor ID
-      date: { type: Date, default: Date.now },
-    },
-  ],
-*/
+module.exports = new MedicalRecController();
