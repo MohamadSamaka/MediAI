@@ -2,6 +2,9 @@ const Joi = require("joi");
 const JsonedResponseError = require("../errors/JsonedResponseError");
 
 const validateUserCreation = (userData) => {
+  if (typeof userData.DateOfBirth === 'string') {
+    userData.DateOfBirth = new Date(userData.DateOfBirth);
+  }
   const schema = Joi.object({
     fName: Joi.string().min(3).max(30).required(),
     lName: Joi.string().min(3).max(30).required(),
