@@ -2,32 +2,55 @@ const mongoose = require("mongoose");
 const { genSalt, hash, compare } = require("bcryptjs");
 const Role = require("./roleModel");
 
-const UserSchema = new mongoose.Schema(
-  {
-    fName: { type: String, minlength: 3, required: true },
-    lName: { type: String, minlength: 3, required: true },
-    email: { type: String, required: true, unique: true },
-    roleId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: Role,
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
-    DateOfBirth: { type: Date, required: true },
-    address: { type: String, required: true },
+const UserSchema = new mongoose.Schema({
+  idPerson: {
+    type: String,
+    required: true,
+    unique: true,
+    maxlength: 10,
+    minlength: 8,
   },
-  { timestamps: true }
-);
+  Fname: {
+    type: String,
+    required: true,
+    maxlength: 30,
+    minlength: 3,
+  },
+  Lname: {
+    type: String,
+    required: true,
+    maxlength: 30,
+    minlength: 3,
+  },
+  email: { type: String, required: true, unique: true },
+  phone: {
+    type: String,
+    required: true,
+    minlength: 13,
+    maxlength: 13,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  DateOfBirth: { type: Date, required: true },
+  address: { type: String, required: true },
+  roleId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Role,
+    require: true,
+  },
+
+  medicalInfoId: { type: mongoose.Schema.Types.ObjectId, ref: "MedicalRecord" }, //creat medical record
+  chatLogId: { type: mongoose.Schema.Types.ObjectId, ref: "ChatLog" }, //creat chat log
+});
 
 UserSchema.set("toJSON", {
   virtuals: true,
   transform: function (doc, ret, options) {
     if (ret.roleId) {
       if (options && options.roleAsName) {
-        ret.role = ret.roleId.name;
+        ret.role = ret.roleId.roleName;
       } else {
         ret.role = ret.roleId;
       }
@@ -44,7 +67,7 @@ UserSchema.set("toJSON", {
 UserSchema.pre("save", async function (next) {
   try {
     if (!this.roleId) {
-      const defaultRole = await Role.findOne({ name: "user" });
+      const defaultRole = await Role.findOne({ roleName: "user" });
       if (!defaultRole)
         return next(new Error('Default role "user" not found.'));
       this.roleId = defaultRole._id;

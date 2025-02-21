@@ -1,6 +1,7 @@
 // src/seeds/index.js
 
 const connectDB = require('../config/db');
+const seedMedicalRecords = require('./seedMedicalRecordRoutes');
 const seedRoles = require('./seedRoles');
 const seedUsers = require('./seedUsers'); // if you have it
 
@@ -11,6 +12,7 @@ const seedUsers = require('./seedUsers'); // if you have it
     await seedRoles();
 
     await seedUsers();
+    await seedMedicalRecords();
 
     console.log('All seeding operations completed.');
     process.exit(0);

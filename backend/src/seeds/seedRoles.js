@@ -10,9 +10,9 @@ async function seedRoles() {
 
   for (const roleName of defaultRoles) {
     // Check if this role already exists
-    const existingRole = await Role.findOne({ name: roleName });
+    const existingRole = await Role.findOne( {roleName: roleName});
     if (!existingRole) {
-      await Role.create({ name: roleName });
+      await Role.create({ roleName: roleName });
       console.log(`Seeded role: ${roleName}`);
     }
   }

@@ -10,11 +10,11 @@ class UserRepository {
   }
 
   async getUserByEmail(email) {
-    return await User.findOne({ email }).populate("roleId", "name");
+    return await User.findOne({ email }).populate("roleId", "roleName");
   }
 
   async getUserById(id, roleAsName = false) {
-    return await User.findById(id).populate("roleId", "name").toJSON({roleAsName})
+    return await User.findById(id).populate("roleId", "roleName").toJSON({roleAsName})
   }
 
   async updateUser(id, updateData) {

@@ -2,15 +2,7 @@ const roleRepository = require('../repositories/roleRepository');
 const { validateRoleCreation } = require('../validators/roleValidator');
 
 class RoleService {
-  async createRole(roleData) {
-    validateRoleCreation(roleData);
-    const existingRole = await roleRepository.getRoleById(roleData);
-    if (existingRole) 
-      throw new JsonedResponseError("Role already exists", 409);
-    const createdRole = await roleRepository.createRole(roleData);
-    return createdRole._id;
-  }
-
+  
   async getAllRoles() {
     return roleRepository.getAllRoles();
   }
