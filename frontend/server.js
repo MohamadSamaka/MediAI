@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors')
 const path = require('path');
 const morgan = require('morgan'); // Logging middleware
 
 const app = express();
+app.use(cors())
 const PORT = process.env.PORT || 3000;
 
 // Use morgan to log all requests

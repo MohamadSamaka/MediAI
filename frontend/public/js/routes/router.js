@@ -16,6 +16,10 @@ export const routes = [
     loader: () => import("/js/views/contact.js"),
   },
   {
+    pattern: "/login",
+    loader: () => import("/js/views/login.js"),
+  },
+  {
     pattern: "*",
     loader: () => import("/js/views/notFound.js"),
   },
