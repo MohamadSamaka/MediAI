@@ -1,10 +1,7 @@
 const Role = require("../models/roleModel");
 
 class RoleRepository {
-  async createRole(roleData) {
-    return await Role.create(roleData);
-  }
-
+  
   async getAllRoles() {
     return await Role.find();
   }

@@ -2,56 +2,47 @@ const mongoose = require("mongoose");
 const { genSalt, hash, compare } = require("bcryptjs");
 const Role = require("./roleModel");
 
-
 const UserSchema = new mongoose.Schema({
-    id: { 
-        type: Number, 
-        required: true, 
-        unique: true
-     },
-    Fname: { 
-        type: String, 
-        required: true,
-        maxlength: 30,
-        minlength: 3
-     },
-    Lname: { 
-        type: String, 
-        required: true,
-        maxlength: 30,
-        minlength: 3
-     },
-    email: { type: String,
-         required: true,
-          unique: true
-         },
-        phone:{
-          type: String,
-          required: true,
-          minlength: 13,
-          maxlength: 13,
-          unique: true  //מספר טלפון יהיה ייחודי? או לא האם להתיחס שיש ילדים והמספר יהיה מספר ההורים?
-        },
-    password: { 
-        type: String,
-         required: true
-         }, 
-    DateOfBirth: { type: Date,
-         required: true
-         },
-    address: { type: String, 
-        required: true
-     },
-    roleId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: Role,
-    },
+  idPerson: {
+    type: Number,
+    required: true,
+    unique: true,
+    maxlength: 10,
+    minlength: 8,
+  },
+  Fname: {
+    type: String,
+    required: true,
+    maxlength: 30,
+    minlength: 3,
+  },
+  Lname: {
+    type: String,
+    required: true,
+    maxlength: 30,
+    minlength: 3,
+  },
+  email: { type: String, required: true, unique: true },
+  phone: {
+    type: String,
+    required: true,
+    minlength: 13,
+    maxlength: 13,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  DateOfBirth: { type: Date, required: true },
+  address: { type: String, required: true },
+  roleId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Role,
+  },
 
-   medicalInfoId: { type: mongoose.Schema.Types.ObjectId, ref: 'medicalRecord' },//creat medical record
-   chatLogId:{type:mongoose.Schema.Types.ObjectId, ref: 'chatLog'}//creat chat log
+  medicalInfoId: { type: mongoose.Schema.Types.ObjectId, ref: "MedicalRecord" }, //creat medical record
+  chatLogId: { type: mongoose.Schema.Types.ObjectId, ref: "ChatLog" }, //creat chat log
 });
-
-
 
 UserSchema.set("toJSON", {
   virtuals: true,

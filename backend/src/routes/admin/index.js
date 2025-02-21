@@ -5,7 +5,7 @@ const authMiddleware = require("../../middlewares/authMiddleware");
 const userRouter = require("./userRoutes");
 const roleRouter = require("./roleRoutes");
 
-adminRouter.use(authMiddleware)
+adminRouter.use(authMiddleware)//procted routes
 adminRouter.use(adminMiddleware)
 
 adminRouter.use("/user", userRouter)

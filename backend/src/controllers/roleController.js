@@ -1,15 +1,7 @@
 const roleService = require("../services/roleService");
 
 class RoleController {
-  async createRole(req, res) {
-    try {
-      const roleId = await roleService.createRole(req.body);
-      res.status(201).json({ message: "Role created successfully", roleId });
-    } catch (err) {
-      res.status(err.statusCode).json({ error: err.message });
-    }
-  }
-
+ 
   async getAllRoles(req, res) {
     try {
       const roles = await roleService.getAllRoles();
@@ -25,6 +17,8 @@ class RoleController {
     }
   }
 
+  
+///check what is dis for
   async getRoleById(req, res) {
     try {
       const { id } = req.params;

@@ -1,4 +1,5 @@
-// src/seeds/seedUsers.js
+// src/seeds/seedUsers.js 
+//this is for intial data for db
 
 const User = require('../models/userModel');
 const Role = require('../models/roleModel');
@@ -7,7 +8,7 @@ const Role = require('../models/roleModel');
  * Seeds a default admin user if none exists.
  */
 async function seedUsers() {
-  const adminRole = await Role.findOne({ name: 'admin' });
+  const adminRole = await Role.findOne({ roleName: 'admin' });
   if (!adminRole) {
     console.warn(`Admin role not found. Please run "seedRoles" first.`);
     return;
