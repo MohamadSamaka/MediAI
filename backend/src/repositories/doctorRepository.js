@@ -46,6 +46,15 @@ class DoctorRepository {
         );
       }
 
+
+  async removePastAppointments(doctorId, today) {
+    return await Doctor.findByIdAndUpdate(
+      doctorId,
+      { $pull: { appointments: { appointment_time: { $lt: today } } } }, 
+      { new: true }
+    );
+  }
+
       async getAvailableAppointments(doctorId) {
         const doctor = await Doctor.findById(doctorId);
         if (!doctor) return [];

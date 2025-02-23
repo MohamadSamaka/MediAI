@@ -13,6 +13,19 @@ class MedicalRecRepository {
     );
   }
 
+
+  async updateMedicalRecord(id, data) {
+    return await MedicalRecord.findByIdAndUpdate(id, data, { new: true });
+  }
+
+  async removePastAppointments(userId, today) {
+    return await MedicalRecord.findOneAndUpdate(
+      { userId },
+      { $pull: { appointmentId: { appointment_time: { $lt: today } } } }, 
+      { new: true }
+    );
+  }
+
   async removeAppointment(userId, appointmentId) {
     return await MedicalRecord.findOneAndUpdate(
       { userId },
@@ -20,6 +33,8 @@ class MedicalRecRepository {
       { new: true }
     );
   }
+
+
 
 
   async getPrescriptions(userId) {
