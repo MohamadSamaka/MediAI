@@ -1,7 +1,7 @@
 const Doctor = require("../models/Doctor");
 
 class DoctorRepository {
-
+///later for registration
   async createDoctor(data){
 
 
