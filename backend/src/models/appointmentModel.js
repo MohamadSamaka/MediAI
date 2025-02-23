@@ -9,7 +9,6 @@ const appointmentSchema = new mongoose.Schema({
     required: true,
   },
   dateTime: { type: Date, required: true },
-  status: { type: Boolean, default: false }, //false=available, true=booked
   patient: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
 });
 
