@@ -1,0 +1,34 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#register-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+h2 {
+  color: #333;
+}
+
+.user-info {
+  background: #e9f5fc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.actions button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #218838;
+}
