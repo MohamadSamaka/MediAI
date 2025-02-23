@@ -7,6 +7,25 @@ const medicalRecService = require("../services/medicalRecService");
 //doctors dont need to see future appointments of user
 
 class MedicalRecController {
+  
+  async getMedicalRecord(req, res) {
+    try {
+      const record = await medicalRecordService.getMedicalRecordByUserId(req.params.userId);
+      res.json(record);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching medical record" });
+    }
+  }
+
+  async cancelAppointment(req, res) {
+    try {
+      await medicalRecordService.cancelAppointment(req.params.appointmentId);
+      res.json({ message: "Appointment successfully canceled" });
+    } catch (error) {
+      res.status(500).json({ message: "Error canceling appointment", error: error.message });
+    }
+  }
+
   async getPrescriptions(req, res) {
     try {
       const userIdObj = req.user.id;
@@ -22,6 +41,8 @@ class MedicalRecController {
       });
     }
   }
+
+
 }
 
 module.exports = new MedicalRecController();

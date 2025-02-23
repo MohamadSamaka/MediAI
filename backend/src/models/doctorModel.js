@@ -6,10 +6,12 @@ const doctorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Doctor",
   },
+  //change with expertiseModel
   experties: {
     type: String,
     required: true,
   },
+  ///change with hospitalModel
   location: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Locations",
