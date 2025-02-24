@@ -6,7 +6,8 @@ const doctorSchema = new mongoose.Schema({
     ref: "User",
   },
   experties: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Expertise",
     required: true,
   },
   workingTime: [

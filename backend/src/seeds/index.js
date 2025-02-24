@@ -1,5 +1,6 @@
 const connectDB = require('../config/db');
 const seedMedicalRecords = require('./seedMedicalRecordRoutes');
+const seedExperties = require('./seedExpertise');
 const seedRoles = require('./seedRoles');
 const seedLocations = require('./seedLocations');
 const seedUsers = require('./seedUsers'); // if you have it
@@ -8,6 +9,7 @@ const seedUsers = require('./seedUsers'); // if you have it
   try {
     await connectDB();
     await seedRoles();
+    await seedExperties();
     await seedLocations()
     await seedUsers();
     await seedMedicalRecords();

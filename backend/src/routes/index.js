@@ -7,7 +7,6 @@ const appRouter = Router()
 const medicalRecRouter = require("./medicalRecordRoutes");
 
 appRouter.use("/api/auth", authRouter);
-appRouter.use("/api/auth", authRouter);
 appRouter.use("/api/admin", adminRouter)
 appRouter.use("/api/public", publicRouter)
 appRouter.use("/api/protected", protectedRouter)

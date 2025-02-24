@@ -7,21 +7,19 @@ async function seedLocations() {
     await connectDB();
     console.log("Database connected.");
 
-    // Clear existing location documents
     await Locations.deleteMany({});
     console.log("Existing locations cleared.");
 
-    // Sample data: each document contains a single location string
     const locationsData = [
-      { locationName: "New York" },
-      { locationName: "Los Angeles" },
-      { locationName: "Chicago" },
-      { locationName: "Houston" },
-      { locationName: "Phoenix" },
-      { locationName: "Philadelphia" },
-      { locationName: "San Antonio" },
-      { locationName: "San Diego" },
-      { locationName: "Dallas" }
+      { locationName: "Tel Aviv" },
+      { locationName: "Jerusalem" },
+      { locationName: "Haifa" },
+      { locationName: "Beersheba" },
+      { locationName: "Eilat" },
+      { locationName: "Netanya" },
+      { locationName: "Ashdod" },
+      { locationName: "Holon" },
+      { locationName: "Rishon LeZion" }
     ];
 
     // Insert sample data into the collection
