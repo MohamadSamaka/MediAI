@@ -7,7 +7,7 @@ class RoleRepository {
   }
 
   async getRoleById(id) {
-    return await Role.findById(id).select("-_id");
+    return await Role.findById(id);
   }
 
   async updateRole(id, roleData) {

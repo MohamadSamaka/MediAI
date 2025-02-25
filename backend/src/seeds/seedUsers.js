@@ -1,6 +1,3 @@
-// src/seeds/seedUsers.js 
-//this is for intial data for db
-
 const User = require('../models/userModel');
 const Role = require('../models/roleModel');
 const Expertise = require('../models/expertiseModel');

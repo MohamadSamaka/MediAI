@@ -1,23 +1,53 @@
 const JsonedResponseError = require("../errors/JsonedResponseError");
 const userRepository = require("../repositories/userRepository");
+const roleRepository = require("../repositories/roleRepository");
+
 const { validateUserCreation } = require("../validators/userValidtors");
 
 class UserService {
-  async createUser(userData) {
+  async createUser(creatingUserData) {
     try {
-      validateUserCreation(userData);
-      const existingUser = await userRepository.getUserByEmail(userData.email);
+      validateUserCreation(creatingUserData);
+      const existingUser = await userRepository.getUserByEmail(
+        creatingUserData.email
+      );
+      const role = await roleRepository.getRoleById(creatingUserData.userData.roleId);
+      if (!role) throw new JsonedResponseError("Sent Role Doesn't Exist", 400);
       if (existingUser)
         throw new JsonedResponseError("User already exists", 409);
+      // if (
+      //   role.roleName.toLowerCase() !== "doctor" &&
+      //   creatingUserData.doctorData
+      // )
+      //   throw new JsonedResponseError(
+      //     "User is not of type doctor, you can't provide doctor data",
+      //     409
+      //   );
+      if (
+        role.roleName.toLowerCase() === "doctor" &&
+        !creatingUserData.doctorData
+      )
+        throw new JsonedResponseError(
+          "Please Provide the doctor data to create a doctor",
+          404
+        );
+      if (
+        role.roleName.toLowerCase() === "doctor" &&
+        creatingUserData.doctorData
+      ) {
+        const createdUser = await userRepository.createUser(
+          creatingUserData.userData,
+          { doctorData: creatingUserData.doctorData, createDoctor: true }
+        );
+        return createdUser._id;
+      }
 
-      const createdUser = await userRepository.createUser(userData);
+      const createdUser = await userRepository.createUser(creatingUserData);
       return createdUser._id;
     } catch (error) {
-      console.log(error)
-      if (error instanceof JsonedResponseError) 
-        throw error
-      else
-        throw new JsonedResponseError(error.message, 500)
+      console.log(error);
+      if (error instanceof JsonedResponseError) throw error;
+      else throw new JsonedResponseError(error.message, 500);
     }
   }
 

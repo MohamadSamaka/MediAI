@@ -11,4 +11,3 @@ protectedRouter.use("/expertise", ProtectedexpertiesRouter)
 
 module.exports = protectedRouter;
 
-
