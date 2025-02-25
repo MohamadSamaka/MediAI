@@ -3,12 +3,24 @@
 
 const User = require('../models/userModel');
 const Role = require('../models/roleModel');
-
+const Expertise = require('../models/expertiseModel');
 /**
  * Seeds a default admin user if none exists.
  */
 async function seedUsers() {
   const adminRole = await Role.findOne({ roleName: 'admin' });
+  if (!adminRole) {
+    console.warn(`Admin role not found. Please run "seedRoles" first.`);
+    return;
+  }
+
+  const userRole = await Role.findOne({ roleName: 'user' });
+  if (!adminRole) {
+    console.warn(`user role not found. Please run "seedRoles" first.`);
+    return;
+  }
+
+  const doctorRole = await Role.findOne({ roleName: 'doctor' });
   if (!adminRole) {
     console.warn(`Admin role not found. Please run "seedRoles" first.`);
     return;

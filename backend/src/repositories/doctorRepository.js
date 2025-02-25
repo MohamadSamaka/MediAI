@@ -1,4 +1,6 @@
+const { json } = require("body-parser");
 const Doctor = require("../models/DoctorModel");
+const JsonedResponseError = require("../errors/JsonedResponseError");
 
 class DoctorRepository {
 ///later for registration
@@ -28,8 +30,17 @@ async getDoctorbyObjId(id){
 
       // Get doctor's appointments sorted by date
   async getDoctorAppointments(doctorId) {
-    return await Appointment.find({ doctor: doctorId }).sort({ dateTime: 1 });
-    //return await Doctor.find(doctorId).Appointment;
+    try{
+      const doc=await Doctor.find(doctorId).select("appointments").populate("appointments.appointment_id");;
+   if(!doc){
+    throw new JsonedResponseError("doctor not find", 404)
+   }
+   
+    return  doc;
+    } catch(error){
+      throw new Error(error.message);
+    }
+   
   }
 //we valdiated at appointments
       async addAppointment(doctorId, appointment) {
@@ -77,6 +88,7 @@ async getDoctorbyObjId(id){
     
           // Fetch booked appointments for the doctor on this day
           let bookedAppointments = await this.getDoctorAppointments(doctorId);
+       
           let bookedTimes = bookedAppointments.map(a => a.dateTime.getTime());
     
           for (let time = startTime.getTime(); time < endTime.getTime(); time += 15 * 60000) {

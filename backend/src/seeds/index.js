@@ -10,10 +10,10 @@ const shirinSeeds=require('./shirinSeeds');
   try {
     await connectDB();
     //await shirinSeed();
-    //await seedRoles();
+    await seedRoles();
 
-    ///await seedUsers();
-    ///await seedMedicalRecords();
+    await seedUsers();
+    await seedMedicalRecords();
 
     console.log('All seeding operations completed.');
     process.exit(0);

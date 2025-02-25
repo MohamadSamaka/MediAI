@@ -4,10 +4,10 @@ class DoctorController {
   async createDoctor(req, res, next){
     try{
       const doctor= await doctorService.createDoctor(req.body, req.user);
-      res.json(doctor);
+      res.status(201).json(doctor);
     }
     catch(error){
-      res.status(201).json({ message: "Error fetching doctor" });
+      res.status(500).json({ message: "Error fetching doctor" });
       next(error);
     }
   }
