@@ -7,9 +7,11 @@ class DoctorRepository {
 
   }
 
-
-    async getDoctorById(docId) {
-        return await Doctor.findById(docId);
+async getDoctorbyObjId(id){
+  return await Doctor.findById(id);
+}
+    async getDoctorByUserId(docUserId) {
+        return await Doctor.find({id: docUserId});
       }
     
       async getAllDoctors() {
@@ -29,7 +31,7 @@ class DoctorRepository {
     return await Appointment.find({ doctor: doctorId }).sort({ dateTime: 1 });
     //return await Doctor.find(doctorId).Appointment;
   }
-
+//we valdiated at appointments
       async addAppointment(doctorId, appointment) {
         return await Doctor.findByIdAndUpdate(
           doctorId,

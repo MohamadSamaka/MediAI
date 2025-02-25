@@ -31,3 +31,19 @@ cron.schedule("0 0 * * *", async () => {
   await cleanUpDoctorAppointments();
   await cleanUpMedicalRecords();
 });
+
+
+const initializeCronJobs = () => {
+  console.log('Initializing scheduled tasks...');
+
+  // Run every day at midnight (00:00)
+  cron.schedule('0 0 * * *', async () => {
+      console.log('Running daily task...');
+      try {
+          await cleanUpDoctorAppointments();
+          console.log('Task executed successfully');
+      } catch (error) {
+          console.error('Error executing task:', error);
+      }
+  });
+}

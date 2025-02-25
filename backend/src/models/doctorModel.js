@@ -8,7 +8,8 @@ const doctorSchema = new mongoose.Schema({
   },
   //change with expertiseModel
   experties: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ExpertiseModel",
     required: true,
   },
   ///change with hospitalModel

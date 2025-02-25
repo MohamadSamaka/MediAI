@@ -1,7 +1,18 @@
 const appointmentService = require("../services/appointmentService");
 
 class AppointmentController {
-  async getAppointment(req, res) {
+  async createAppointment(req, res, next) {
+    try { 
+      const appointment = await AppointmentService.createAppointment(req.body, req.user);
+      res.status(201).json(appointment);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+
+  async getAppointment(req, res,) {
     try {
       const appointment = await appointmentService.getAppointmentById(req.params.id);
       res.json(appointment);
@@ -19,18 +30,11 @@ class AppointmentController {
     }
   }
 
-  async createAppointment(req, res) {
-    try {
-      const appointment = await appointmentService.createAppointment(req.body);
-      res.json(appointment);
-    } catch (error) {
-      res.status(500).json({ message: "Error creating appointment" });
-    }
-  }
+
 
   async cancelAppointment(req, res) {
     try {
-      await appointmentService.cancelAppointment(req.params.id);
+      await appointmentService.cancelAppointment(req.params.id, req.user);
       res.json({ message: "Appointment canceled" });
     } catch (error) {
       res.status(500).json({ message: "Error canceling appointment" });
