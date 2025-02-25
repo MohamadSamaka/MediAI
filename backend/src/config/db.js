@@ -1,5 +1,6 @@
 const { MONGO_URI } = require("./env")
 const mongoose = require("mongoose");
+require("../models/index.js");
 
 const connectDB = async () => {
     try {

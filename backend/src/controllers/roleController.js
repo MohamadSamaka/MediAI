@@ -2,7 +2,7 @@ const roleService = require("../services/roleService");
 
 class RoleController {
  
-  async getAllRoles(req, res) {
+  async getAllRoles(req, res, next) {
     try {
       const roles = await roleService.getAllRoles();
       return res.status(200).json({
@@ -10,16 +10,13 @@ class RoleController {
         data: roles,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
   
 ///check what is dis for
-  async getRoleById(req, res) {
+  async getRoleById(req, res, next) {
     try {
       const { id } = req.params;
       const role = await roleService.getRoleById(id);
@@ -34,14 +31,11 @@ class RoleController {
         data: role,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
-  async updateRole(req, res) {
+  async updateRole(req, res, next) {
     try {
       const { id } = req.params;
       const updateData = req.body;
@@ -59,14 +53,11 @@ class RoleController {
         data: updatedRole,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
-  async deleteRole(req, res) {
+  async deleteRole(req, res, next) {
     try {
       const { id } = req.params;
       const deletedRole = await roleService.deleteRole(id);
@@ -83,10 +74,7 @@ class RoleController {
         data: deletedRole,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 }

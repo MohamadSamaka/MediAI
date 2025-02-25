@@ -1,10 +1,21 @@
 const User = require("../models/userModel");
 const MedicalRecord = require("../models/medicalRecordModel");
 const ChatLog = require("../models/chatLogModel")
+const Doctor = require("../models/doctorModel")
 
 class UserRepository {
-  async createUser(userData) {
-    let newUser, newMedRecord, newChatLog;
+  /**
+   * Creates a new user along with associated records.
+   *
+   * @param {Object} userData - Data for the new user.
+   * @param {Object} options - Additional options.
+   * @param {Boolean} options.createDoctor - Flag to indicate whether to create a doctor record.
+   * @param {Object} [options.doctorData={}] - Doctor-specific data (experties, location, workingTime).
+   * @returns {Object} - If a doctor is created, returns { user, doctor }; otherwise, returns the user.
+   */
+  async createUser(userData, options = {}) {
+    let newUser, newMedRecord, newChatLog, newDoctor;
+    const { createDoctor = false, doctorData = {} } = options;
 
     try {
       // 1. Create the user
@@ -13,18 +24,16 @@ class UserRepository {
         throw new Error("User creation failed.");
       }
 
-      // 2. Create the medical record with reference to the new user
+      // 2. Create the medical record linked to the user
       newMedRecord = await MedicalRecord.create({ userId: newUser._id });
       if (!newMedRecord) {
-        // Rollback: delete the user if the medical record creation fails
         await User.findByIdAndDelete(newUser._id);
         throw new Error("Medical record creation failed.");
       }
 
-      // 3. Create the chat log for the new user
+      // 3. Create the chat log for the user
       newChatLog = await ChatLog.create({ user_id: newUser._id });
       if (!newChatLog) {
-        // Rollback: remove medical record and user if chat log creation fails
         await MedicalRecord.findByIdAndDelete(newMedRecord._id);
         await User.findByIdAndDelete(newUser._id);
         throw new Error("Chat log creation failed.");
@@ -35,14 +44,44 @@ class UserRepository {
       newUser.chatLogId = newChatLog._id;
       const updatedUser = await newUser.save();
       if (!updatedUser) {
-        // Rollback: delete chat log, medical record, and user if update fails
         await ChatLog.findByIdAndDelete(newChatLog._id);
         await MedicalRecord.findByIdAndDelete(newMedRecord._id);
         await User.findByIdAndDelete(newUser._id);
         throw new Error("User update with associated records failed.");
       }
 
-      return updatedUser;
+      // 5. Optionally create a doctor record if the flag is provided
+      if (createDoctor) {
+        // Verify that necessary doctor data is provided
+        if (!doctorData.experties || !doctorData.workingTime) {
+          // Rollback all previously created records if doctor data is incomplete
+          await ChatLog.findByIdAndDelete(newChatLog._id);
+          await MedicalRecord.findByIdAndDelete(newMedRecord._id);
+          await User.findByIdAndDelete(newUser._id);
+          throw new Error("Incomplete doctor data provided.");
+        }
+
+        newDoctor = await Doctor.create({
+          id: newUser._id, // Associate the doctor record with the user
+          experties: doctorData.experties,
+          workingTime: doctorData.workingTime,
+          // appointments can be left undefined or initialized as an empty array
+        });
+
+        if (!newDoctor) {
+          await ChatLog.findByIdAndDelete(newChatLog._id);
+          await MedicalRecord.findByIdAndDelete(newMedRecord._id);
+          await User.findByIdAndDelete(newUser._id);
+          throw new Error("Doctor creation failed.");
+        }
+      }
+
+      // Return both user and doctor (if created) or just the user
+      if (createDoctor) {
+        return { user: updatedUser, doctor: newDoctor };
+      } else {
+        return updatedUser;
+      }
     } catch (error) {
       throw error;
     }

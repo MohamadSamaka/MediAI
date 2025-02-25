@@ -1,18 +1,13 @@
-const e = require("express");
 const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Doctor",
+    ref: "User",
   },
   experties: {
-    type: String,
-    required: true,
-  },
-  location: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Locations",
+    ref: "Expertise",
     required: true,
   },
   workingTime: [

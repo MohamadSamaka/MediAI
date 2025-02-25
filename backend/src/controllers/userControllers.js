@@ -1,19 +1,16 @@
 const userService = require("../services/userService");
 
 class UserController {
-  async createUser(req, res) {
+  async createUser(req, res, next) {
     try {
       const userId = await userService.createUser(req.body);
       res.status(201).json({ message: "User created successfully", userId });
-    } catch (err) {
-      return res.status(err.statusCode).json({
-        success: false,
-        message: err.message,
-      });
+    } catch (error) {
+      next(error)
     }
   }
   
-  async getAllUsers(req, res) {
+  async getAllUsers(req, res, next) {
     try {
       const users = await userService.getAllUsers();
       return res.status(200).json({
@@ -21,15 +18,12 @@ class UserController {
         data: users,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
 
-  async getUserById(req, res) {
+  async getUserById(req, res, next) {
     try {
       const { id } = req.params;
       const user = await userService.getUserById(id, true);
@@ -38,14 +32,11 @@ class UserController {
         data: user,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
-  async updateUser(req, res) {
+  async updateUser(req, res, next) {
     try {
       const { id } = req.params;
       const updateData = req.body;
@@ -63,14 +54,11 @@ class UserController {
         data: updatedUser,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 
-  async deleteUser(req, res) {
+  async deleteUser(req, res, next) {
     try {
       const { id } = req.params;
       const deletedUser = await userService.deleteUser(id);
@@ -87,10 +75,7 @@ class UserController {
         data: deletedUser,
       });
     } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+      next(error)
     }
   }
 }
