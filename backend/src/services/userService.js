@@ -11,7 +11,9 @@ class UserService {
       const existingUser = await userRepository.getUserByEmail(
         creatingUserData.email
       );
-      const role = await roleRepository.getRoleById(creatingUserData.userData.roleId);
+      const role = await roleRepository.getRoleById(
+        creatingUserData.userData.roleId
+      );
       if (!role) throw new JsonedResponseError("Sent Role Doesn't Exist", 400);
       if (existingUser)
         throw new JsonedResponseError("User already exists", 409);
@@ -41,7 +43,6 @@ class UserService {
         );
         return createdUser._id;
       }
-
       const createdUser = await userRepository.createUser(creatingUserData);
       return createdUser._id;
     } catch (error) {

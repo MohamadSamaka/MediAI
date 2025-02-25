@@ -1,31 +1,43 @@
+
 const Appointment = require("../models/appointmentModel");
 
+
 class AppointmentRepository {
-  async create(data) {
+  
+  async createAppointment(data) {
     return await Appointment.create(data);
   }
 
-  async findById(id) {
-    // populate doctor and patient for richer data (optional)
+  async getAppointmentById(id) {
     return await Appointment.findById(id).populate("doctor patient");
   }
 
-  async findAll() {
+  async getAllAppointments() {
     return await Appointment.find().populate("doctor patient");
   }
-  
-  // Find appointments matching a filter
-  async findByFilter(filter) {
-    return await Appointment.find(filter).populate("doctor patient");
+
+  async createAppointment(data) {
+    return await Appointment.create(data);
   }
 
-  async update(id, data) {
-    return await Appointment.findByIdAndUpdate(id, data, { new: true });
-  }
-
-  async delete(id) {
+  async cancelAppointment(id) {
     return await Appointment.findByIdAndDelete(id);
   }
+//for admin
+  async getAppointmentsByUser(userId) {
+    
+    return await Appointment.find({ patient: userId }).populate("doctor");
+  }
+//for admin
+  async getAppointmentsByDoctor(doctorId) {
+    return await Appointment.find({ doctor: doctorId }).populate("patient");
+  }
+
+
+
+
 }
 
 module.exports = new AppointmentRepository();
+
+

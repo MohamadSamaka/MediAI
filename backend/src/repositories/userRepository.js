@@ -53,7 +53,7 @@ class UserRepository {
       // 5. Optionally create a doctor record if the flag is provided
       if (createDoctor) {
         // Verify that necessary doctor data is provided
-        if (!doctorData.experties || !doctorData.workingTime) {
+        if (!doctorData.expertise || !doctorData.workingTime) {
           // Rollback all previously created records if doctor data is incomplete
           await ChatLog.findByIdAndDelete(newChatLog._id);
           await MedicalRecord.findByIdAndDelete(newMedRecord._id);
@@ -63,7 +63,8 @@ class UserRepository {
 
         newDoctor = await Doctor.create({
           id: newUser._id, // Associate the doctor record with the user
-          experties: doctorData.experties,
+          location: doctorData.location,
+          expertise: doctorData.expertise,
           workingTime: doctorData.workingTime,
           // appointments can be left undefined or initialized as an empty array
         });

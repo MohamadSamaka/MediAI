@@ -1,48 +1,66 @@
-const AppointmentService = require("../services/appointmentService");
+const appointmentService = require("../services/appointmentService");
 
 class AppointmentController {
-  async create(req, res, next) {
+  async createAppointment(req, res, next) {
     try {
-      const appointment = await AppointmentService.createAppointment(req.body, req.user);
+      const appointment = await appointmentService.createAppointment(
+        req.body,
+        req.user
+      );
       res.status(201).json(appointment);
     } catch (error) {
       next(error);
     }
   }
 
-  async getAll(req, res, next) {
+  async getAppointment(req, res) {
     try {
-      const appointments = await AppointmentService.getAppointments(req.user);
+      const appointment = await appointmentService.getAppointmentById(
+        req.params.id
+      );
+      res.json(appointment);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching appointment" });
+    }
+  }
+
+  async getAllAppointments(req, res) {
+    try {
+      const appointments = await appointmentService.getAllAppointments();
       res.json(appointments);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Error fetching appointments" });
     }
   }
 
-  async getById(req, res, next) {
+  async cancelAppointment(req, res) {
     try {
-      const appointment = await AppointmentService.getAppointmentById(req.params.id, req.user);
-      res.json(appointment);
+      await appointmentService.cancelAppointment(req.params.id, req.user);
+      res.json({ message: "Appointment canceled" });
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Error canceling appointment" });
     }
   }
 
-  async update(req, res, next) {
+  async getAppointmentsByUser(req, res) {
     try {
-      const appointment = await AppointmentService.updateAppointment(req.params.id, req.body, req.user);
-      res.json(appointment);
+      const appointments = await appointmentService.getAppointmentsByUser(
+        req.params.userId
+      );
+      res.json(appointments);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Error fetching user appointments" });
     }
   }
 
-  async delete(req, res, next) {
+  async getAppointmentsByDoctor(req, res) {
     try {
-      await AppointmentService.deleteAppointment(req.params.id, req.user);
-      res.status(204).send();
+      const appointments = await appointmentService.getAppointmentsByDoctor(
+        req.params.doctorId
+      );
+      res.json(appointments);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Error fetching doctor appointments" });
     }
   }
 }

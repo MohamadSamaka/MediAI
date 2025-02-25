@@ -9,19 +9,22 @@ const createAppointmentSchema = Joi.object({
   // Accept an array of strings for doctors without pattern validation
   doctors: Joi.array().items(Joi.string()).optional(),
   dateTime: Joi.date().iso().required(),
-  status: Joi.boolean().optional(),
+  
   // Accept any string for patient, allowing null as well
   patient: Joi.string().optional().allow(null),
 });
 
+/*
 const updateAppointmentSchema = Joi.object({
   experties: Joi.string().min(1).max(100).optional(),
   location: Joi.string().min(1).max(100).optional(),
   doctor: Joi.string().optional(),
   dateTime: Joi.date().iso().optional(),
-  status: Joi.boolean().optional(),
+
   patient: Joi.string().optional().allow(null),
 });
+*/
+
 
 function validateAppointmentCreation(data) {
   const { error } = createAppointmentSchema.validate(data, {
@@ -39,5 +42,5 @@ function validateAppointmentUpdate(data) {
 
 module.exports = {
   validateAppointmentCreation,
-  validateAppointmentUpdate,
+ // validateAppointmentUpdate,
 };

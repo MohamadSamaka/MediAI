@@ -4,10 +4,12 @@ const seedExperties = require('./seedExpertise');
 const seedRoles = require('./seedRoles');
 const seedLocations = require('./seedLocations');
 const seedUsers = require('./seedUsers'); // if you have it
+//const shirinSeeds=require('./shirinSeeds');
 
 (async () => {
   try {
     await connectDB();
+
     await seedRoles();
     await seedExperties();
     await seedLocations()
