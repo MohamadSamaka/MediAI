@@ -26,14 +26,16 @@ const appointmentSchema = Joi.array().items(
 
 // Doctor validation schema for user creation (all fields required)
 const doctorCreationSchema = Joi.object({
-  experties: Joi.string().required(),
+  expertise: Joi.string().required(),
+  location: Joi.string().required(),
   workingTime: workingTimeSchema.required(),
   appointments: appointmentSchema.optional()
 }).optional();
 
 // Doctor validation schema for user update (all fields optional)
 const doctorUpdateSchema = Joi.object({
-  experties: Joi.string().optional(),
+  expertise: Joi.string().optional(),
+  location: Joi.string().required(),
   workingTime: workingTimeSchema.optional(),
   appointments: appointmentSchema.optional()
 }).optional();
@@ -46,15 +48,15 @@ const validateUserCreation = (data) => {
   
   const schema = Joi.object({
     userData: Joi.object({
-      Fname: Joi.string().min(3).max(30).required(),
-      Lname: Joi.string().min(3).max(30).required(),
-      idPerson: Joi.string().min(8).max(10).required(),
-      phone: Joi.string().length(13).required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().min(6).required(),
-      DateOfBirth: Joi.date().iso().required(),
-      address: Joi.string().required(),
-      roleId: Joi.string().required(),
+    Fname: Joi.string().min(3).max(30).required(),
+    Lname: Joi.string().min(3).max(30).required(),
+    idPerson: Joi.string().min(8).max(10).required(),
+    phone: Joi.string().length(13).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+    DateOfBirth: Joi.date().iso().required(),
+    address: Joi.string().required(),
+    roleId: Joi.string().required(),
     }).required(),
     doctorData: doctorCreationSchema
   }).strict();

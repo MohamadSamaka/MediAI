@@ -9,6 +9,7 @@
     "db:init": "node src/scripts/initDB.js",
     "db:seed": "node src/seeds/index.js",
     "db:drop": "node src/scripts/dropDB.js",
+    "db:getExpertise": "node src/scripts/getAllExpertise.js",
     "db:getRoles": "node src/scripts/getAllRoles.js",
     "db:getLocs": "node src/scripts/getAllLocations.js"
 
