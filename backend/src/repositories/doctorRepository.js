@@ -1,9 +1,9 @@
-const Doctor = require("../models/Doctor");
+const Doctor = require("../models/DoctorModel");
 
 class DoctorRepository {
 ///later for registration
   async createDoctor(data){
-
+    return await Doctor.create(data);
 
   }
 

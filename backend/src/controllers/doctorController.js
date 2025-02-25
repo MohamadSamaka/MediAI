@@ -1,6 +1,17 @@
 const doctorService = require("../services/doctorService");
 
 class DoctorController {
+  async createDoctor(req, res, next){
+    try{
+      const doctor= await doctorService.createDoctor(req.body, req.user);
+      res.json(doctor);
+    }
+    catch(error){
+      res.status(201).json({ message: "Error fetching doctor" });
+      next(error);
+    }
+  }
+
   async getDoctor(req, res, next) {
     try {
       const doctor = await doctorService.getDoctorById(req.params.id);

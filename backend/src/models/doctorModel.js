@@ -1,21 +1,23 @@
-const e = require("express");
 const mongoose = require("mongoose");
+
+// Custom function to validate time format (HH:mm)
+function validateTime(value) {
+  return /^([01]\d|2[0-3]):([0-5]\d)$/.test(value);
+}
 
 const doctorSchema = new mongoose.Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Doctor",
+    ref: "User",
   },
-  //change with expertiseModel
-  experties: {
+  expertise: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ExpertiseModel",
+    ref: "Expertise",
     required: true,
   },
-  ///change with hospitalModel
   location: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Locations",
+    ref: "Location",
     required: true,
   },
   workingTime: [
@@ -33,13 +35,27 @@ const doctorSchema = new mongoose.Schema({
         ],
         required: true,
       },
-      start_time: { type: String, required: true }, // Example: "09:00"
-      end_time: { type: String, required: true }, // Example: "16:00"
+      start_time: {
+        type: String,
+        required: true,
+        validate: {
+          validator: validateTime,
+          message: (props) => `${props.value} is not a valid time format (HH:mm)!`,
+        },
+      },
+      end_time: {
+        type: String,
+        required: true,
+        validate: {
+          validator: validateTime,
+          message: (props) => `${props.value} is not a valid time format (HH:mm)!`,
+        },
+      },
     },
   ],
   appointments: [
     {
-      appointment_time: { type: Date, required: true },
+      appointment_time: { type: Date, required: true, index: true },
       appointment_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Appointment",
@@ -49,10 +65,13 @@ const doctorSchema = new mongoose.Schema({
   ],
 });
 
-//Ensure the appointments array remains sorted by appointment_time
+// Ensure appointments remain sorted by appointment_time before saving
 doctorSchema.pre("save", function (next) {
   this.appointments.sort((a, b) => a.appointment_time - b.appointment_time);
   next();
 });
 
-module.exports = mongoose.model("Doctor", doctorSchema);
+// **Fix: Prevent Overwriting the Model**
+const Doctor = mongoose.models.Doctor || mongoose.model("Doctor", doctorSchema);
+
+module.exports = Doctor;

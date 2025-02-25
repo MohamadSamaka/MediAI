@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const appointmentSchema = new mongoose.Schema({
-  experties: { type: mongoose.Schema.Types.ObjectId, ref: "Experties", default: required },
-  location: { type: mongoose.Schema.Types.ObjectId, ref: "Location", default: required },
+  experties: { type: mongoose.Schema.Types.ObjectId, ref: "Experties", required : true },
+  location: { type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true },
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Doctor",

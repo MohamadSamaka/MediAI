@@ -1,6 +1,5 @@
-const MedicalRecord = require("../models/MedicalRecord");
-const Doctor = require("../models/Doctor");
-const Appointment = require("../models/Appointment");
+
+const Appointment = require("../models/appointmentModel");
 
 
 class AppointmentRepository {

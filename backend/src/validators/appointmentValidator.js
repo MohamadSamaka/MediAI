@@ -42,5 +42,5 @@ function validateAppointmentUpdate(data) {
 
 module.exports = {
   validateAppointmentCreation,
-  validateAppointmentUpdate,
+ // validateAppointmentUpdate,
 };

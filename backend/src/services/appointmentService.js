@@ -1,5 +1,5 @@
 const appointmentRepository = require("../repositories/appointmentRepository");
-const medicalRecordRepository = require("../repositories/medicalRecordRepository");
+const medicalRecordRepository = require("../repositories/medicalRecRepository");
 const doctorRepository = require("../repositories/doctorRepository");
 const userRepository= require("../repositories/userRepository");
 const JsonedResponseError = require("../errors/JsonedResponseError");
@@ -45,8 +45,23 @@ class AppointmentService {
 
     if (!appointment) throw new JsonedResponseError("Appointment not found",404);
     //if admin or if doc/user that are in the appointment
-if((reqUser.role=="admin")||
-(( appointment.doctor==reqUser)||(appointment.patient==reqUser))){
+    if(reqUser.role.toLowerCase()=="doctor"){
+      const doc_id= await doctorRepository.getDoctorByUserId(reqUser.id);
+      if(doc_id==id.doctor){
+        
+    // Remove from user medical record
+    await medicalRecordRepository.removeAppointment(appointment.patient, id);
+
+    // Remove from doctor's schedule
+    await doctorRepository.removeAppointment(appointment.doctor, id);
+
+    // Delete appointment from the system
+    await appointmentRepository.cancelAppointment(id);
+      }
+    }
+  
+else if((reqUser.role.toLowerCase()=="admin")||
+(appointment.patient==reqUser.id)){
 
     // Remove from user medical record
     await medicalRecordRepository.removeAppointment(appointment.patient, id);
@@ -57,7 +72,9 @@ if((reqUser.role=="admin")||
     // Delete appointment from the system
     await appointmentRepository.cancelAppointment(id);
   }
-    
+   else{
+    throw new JsonedResponseError("You are not allowed to cancel someone elses appointment",404);
+   } 
   }
 
   //Removing appointments that already happened in users and doc future appointments
@@ -75,6 +92,8 @@ if((reqUser.role=="admin")||
 
   }
 
+
+  //
   async getAppointmentsByUser(userId) {
     return await appointmentRepository.getAppointmentsByUser(userId);
   }
