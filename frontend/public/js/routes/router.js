@@ -6,13 +6,49 @@ export const routes = [
   {
     pattern: "/about",
     loader: () => import("/js/views/about.js"),
+    styles: [
+      {
+        href: "/styles/about.css",
+        id: "aboutStyles"
+      },
+    ],
   },
   {
-    pattern: "/admin/users",
+    pattern: "/faq",
+    loader: () => import("/js/views/faq.js"),
+    styles: [
+      {
+        href: "/styles/faq.css",
+        id: "faqStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/chat",
+    loader: () => import("/js/views/AIChat.js"),
+    styles: [
+      {
+        href: "/styles/AIChat.css",
+        id: "AIChatStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/services",
+    loader: () => import("/js/views/services.js"),
+    styles: [
+      {
+        href: "/styles/services.css",
+        id: "servicesStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/admin/dashboard/user",
     loader: () => import("/js/views/adminView/creatingUser.js"),
     styles: [
       {
-        href: "../styles/ceatingUserDashboard.css",
+        href: "/styles/ceatingUserDashboard.css",
         id: "ceatingUserDashboard", //the name of the id doesn't matter, what's important is that it has to be unique
       },
     ],
@@ -25,10 +61,22 @@ export const routes = [
   {
     pattern: "/contact",
     loader: () => import("/js/views/contact.js"),
+    styles: [
+      {
+        href: "/styles/contact.css",
+        id: "contactStyles", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
   },
   {
     pattern: "/login",
     loader: () => import("/js/views/login.js"),
+    styles: [
+      {
+        href: "/styles/login.css",
+        id: "loginStyles", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
   },
   {
     pattern: "*",
