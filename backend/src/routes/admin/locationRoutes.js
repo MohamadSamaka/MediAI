@@ -18,7 +18,5 @@ LocationRouter.delete("/:id", (req, res, next) =>
   LocationController.delete(req, res, next)
 );
 
-LocationRouter.get("/closest-locations/:locationId", LocationController.getClosestLocations(req, res)
-);
 
 module.exports = LocationRouter;

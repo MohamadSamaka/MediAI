@@ -30,7 +30,7 @@ class LocationController {
   }
 
 
-  async getClosestLocations(req, res) {
+  async getClosestLocations(req, res, next) {
     try {
         const locationId = req.params.locationId;
 
@@ -46,7 +46,7 @@ class LocationController {
 
         res.json({ sortedLocationIds });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        next(error)
     }
 }
 

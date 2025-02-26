@@ -12,4 +12,5 @@ appRouter.use("/api/public", publicRouter)
 appRouter.use("/api/protected", protectedRouter)
 appRouter.use("/api/", medicalRecRouter)
 
+
 module.exports = appRouter
