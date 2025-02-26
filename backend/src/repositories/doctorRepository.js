@@ -11,7 +11,6 @@ class DoctorRepository {
     return await Doctor.findById(id);
   }
 
-
   async getDoctorByUserId(docUserId) {
     return await Doctor.find({ id: docUserId });
   }
@@ -67,45 +66,71 @@ class DoctorRepository {
       { new: true }
     );
   }
-
   async getAvailableAppointments(doctorId) {
-    const doctor = await Doctor.findById(doctorId);
+    const doctor = await Doctor.findById(doctorId).select(
+      "workingTime appointments"
+    );
     if (!doctor) return [];
 
-    const today = new Date();
+    const now = new Date();
     let availableSlots = [];
 
-    for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
-      let day = new Date();
-      day.setDate(today.getDate() + dayOffset);
-      let dayName = day.toLocaleString("en-US", { weekday: "long" });
+    // Get all booked appointment times (future only)
+    let bookedAppointments = doctor.appointments
+      .map((app) => new Date(app.appointment_time).getTime())
+      .filter((time) => time > now.getTime()); // Only consider future appointments
 
+    // Sorting to make sure we're checking them in order
+    bookedAppointments.sort((a, b) => a - b);
+
+    // Generate available slots
+    let slotCount = 0;
+    let searchDate = new Date(now); // Start searching from now
+
+    while (slotCount < 24) {
+      let dayName = searchDate.toLocaleString("en-US", { weekday: "long" });
+
+      // Check if the doctor works on this day
       let workingDay = doctor.workingTime.find((d) => d.day === dayName);
-      if (!workingDay) continue;
+      if (workingDay) {
+        let [startHour, startMinute] = workingDay.start_time
+          .split(":")
+          .map(Number);
+        let [endHour, endMinute] = workingDay.end_time.split(":").map(Number);
 
-      let startTime = new Date(
-        day.toDateString() + " " + workingDay.start_time
-      );
-      let endTime = new Date(day.toDateString() + " " + workingDay.end_time);
+        let startTime = new Date(searchDate);
+        startTime.setHours(startHour, startMinute, 0, 0);
 
-      // Fetch booked appointments for the doctor on this day
-      let bookedAppointments = await this.getDoctorAppointments(doctorId);
+        let endTime = new Date(searchDate);
+        endTime.setHours(endHour, endMinute, 0, 0);
 
-      let bookedTimes = bookedAppointments.map((a) => a.dateTime.getTime());
+        // If we're on the same day as now, start from the next available slot
+        let slotStartTime = startTime.getTime();
+        if (searchDate.toDateString() === now.toDateString()) {
+          slotStartTime = Math.max(slotStartTime, now.getTime());
+        }
 
-      for (
-        let time = startTime.getTime();
-        time < endTime.getTime();
-        time += 15 * 60000
-      ) {
-        if (!bookedTimes.includes(time)) {
-          availableSlots.push({
-            date: day.toISOString().split("T")[0],
-            time: new Date(time).toTimeString().split(" ")[0],
-          });
+        // Generate slots in 15-minute intervals
+        for (
+          let time = slotStartTime;
+          time < endTime.getTime();
+          time += 15 * 60000
+        ) {
+          if (!bookedAppointments.includes(time)) {
+            availableSlots.push({
+              date: new Date(time).toISOString().split("T")[0], // YYYY-MM-DD
+              time: new Date(time).toTimeString().split(" ")[0], // HH:mm:ss
+            });
+            slotCount++;
+            if (slotCount >= 24) break;
+          }
         }
       }
+
+      // Move to the next day
+      searchDate.setDate(searchDate.getDate() + 1);
     }
+
     return availableSlots;
   }
 

@@ -20,6 +20,21 @@ class LocationRepository {
   async delete(id) {
     return await Locations.findByIdAndDelete(id);
   }
+
+  
+/**
+ * Find a location by name.
+ */
+async findLocationByName(locationName) {
+  return await Location.findOne({ locationName });
+}
+
+/**
+* Find multiple locations by name.
+*/
+async findLocationsByNames(locationNames) {
+  return await Location.find({ locationName: { $in: locationNames } });
+}
 }
 
 module.exports = new LocationRepository();

@@ -1,5 +1,4 @@
 const doctorRepository = require("../repositories/doctorRepository");
-const medicalRecordRepository = require("../repositories/medicalRecordRepository");
 const appointmentRepository = require("../repositories/appointmentRepository");
 const appointmentService = require("../services/appointmentService");
 
@@ -23,12 +22,8 @@ class DoctorService {
     }
   }
 
-  async getDoctorById(data, id) {
-    return await doctorRepository.create(id);
-  }
-
   async getDoctorById(id) {
-    return await doctorRepository.getDoctorById(id);
+    return await doctorRepository.getDoctorbyObjId(id);
   }
 
   async getAllDoctors() {
@@ -72,10 +67,6 @@ class DoctorService {
 
     // Goes to appointment service that calls on all the parties to delete the appointment
     return await appointmentService.cancelAppointment(appointmentId);
-  }
-
-  async getFirstAvailableAppointments(doctorId) {
-    return await doctorRepository.getFirstAvailableAppointments(doctorId);
   }
 }
 
