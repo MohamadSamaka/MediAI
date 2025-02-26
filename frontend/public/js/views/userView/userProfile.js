@@ -43,9 +43,6 @@ function renderUserProfile(user) {
                 </div>
             `).join("") : "<p>No medical records found.</p>"}
         </div>
-
-        <h3>Appointments</h3>
-        <a href="#" onclick="fetchPastAppointments()">📜 View Past Appointments</a>
     `;
 }
 
