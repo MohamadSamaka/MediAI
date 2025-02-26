@@ -14,6 +14,26 @@ export const routes = [
     ],
   },
   {
+    pattern: "/my-appointment",
+    loader: () => import("/js/views/userView/myAppointment.js"),
+    // styles: [
+    //   {
+    //     href: "/styles/about.css",
+    //     id: "aboutStyles"
+    //   },
+    // ],
+  },
+  {
+    pattern: "/book-appointment",
+    loader: () => import("/js/views/userView/appointmentsBooking.js"),
+    // styles: [
+    //   {
+    //     href: "/styles/about.css",
+    //     id: "aboutStyles"
+    //   },
+    // ],
+  },
+  {
     pattern: "/faq",
     loader: () => import("/js/views/faq.js"),
     styles: [

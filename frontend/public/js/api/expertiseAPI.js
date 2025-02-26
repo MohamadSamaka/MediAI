@@ -3,7 +3,7 @@ import axiosInstance from './index.js';
 
 export async function getExpertise() {
   try {
-    const response = await axiosInstance.get('/admin/expertise', {
+    const response = await axiosInstance.get('/protected/expertise', {
       withCredentials: true,
     });
     return response.data
