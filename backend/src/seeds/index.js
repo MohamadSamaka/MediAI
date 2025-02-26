@@ -9,10 +9,9 @@ const seedUsers = require('./seedUsers'); // if you have it
 (async () => {
   try {
     await connectDB();
-
     await seedRoles();
     await seedExperties();
-    await seedLocations()
+    await seedLocations();
     await seedUsers();
     await seedMedicalRecords();
     console.log('All seeding operations completed.');

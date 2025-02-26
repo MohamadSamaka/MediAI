@@ -12,7 +12,7 @@ const jwtVerify = promisify(verify);
 
 const accessTokenGenerator = (payload, expirationTime = null) => {
   const token = sign(
-    { id: payload.id, role: payload.role },
+    { id: payload.id, Fname: payload.Fname, Lname: payload.Lname, role: payload.role },
     ACCESS_TOKEN_SECRET,
     {
       expiresIn: expirationTime ? expirationTime : ACCESS_TOKEN_EXPIRES_IN,

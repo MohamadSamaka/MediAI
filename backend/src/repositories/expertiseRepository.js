@@ -9,6 +9,7 @@ class ExpertiseRepository {
     return await Expertise.findById(id);
   }
 
+
   async findAll() {
     return await Expertise.find({});
   }
