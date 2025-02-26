@@ -1,0 +1,93 @@
+/* body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header, footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 0.5rem;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main#root {
+  padding: 1rem;
+  min-height: 60vh;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+ */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+}
+
+.logo_2 {
+  width: 90px;
+  height: 90px;
+}
+
+.line-temp {
+  position: fixed;
+  background: #2d94bd;
+  height: 1px;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gradient-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(
+    0deg,
+    rgb(221, 196, 115),
+    rgb(46, 187, 168) 20%,
+    rgb(11, 96, 117)
+  );
+  padding: 40px 0px;
+  width: 100%;
+}
+
+.section-section2 {
+  width: 100%;
+  max-width: 1400px;
+}
+
+#section-section1,
+#section-section3,
+#section-section4,
+#section-section5,
+#section-section7,
+.footer {
+  width: 100%;
+}
+
+#section-section5 {
+  background: #159b20;
+}
+
+/****************** TOP BAR******************************/
