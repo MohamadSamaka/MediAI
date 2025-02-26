@@ -1,7 +1,7 @@
 
 import { loadStyles } from "../helpers/stylesManager.js";
 
-export function render() {
+export function render(user) {
   return `
       <h2>Appointment Booking</h2>
     
@@ -96,7 +96,7 @@ export function render() {
 
 
 document.addEventListener("closeLocationDropdown", async function () {
-    
+
 });
 
 
@@ -143,7 +143,16 @@ async function bookAppointment(appointmentId) {
 
     specialtyDropdown.addEventListener("change", filterAppointmentsBySpecialty);
     fetchSpecialties();
+    function createAppintment(doctor, dateTime) {
+        const data = {
+            experties: doctor.Expertise,
+            location: doctor,
+            doctor: doctor.name,
+            dateTime: dateTime,
+            patient: user.name,
 
+        }
+    }
 });
 
 export function init(styles, params) {
