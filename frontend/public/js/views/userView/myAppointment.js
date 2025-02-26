@@ -7,9 +7,9 @@ export function render() {
     `;
 }
 
-async function fetchFutureAppointments() {
+async function fetchFutureAppointments(user) {
     try {
-       // i need the user get the appointments function name
+       // i need the user get the appointments function name user
         const appointments = [];
 
         // Filter future appointments

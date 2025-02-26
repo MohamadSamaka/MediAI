@@ -2,6 +2,7 @@ import { loadStyles } from "../helpers/stylesManager.js";
 import axiosInstance from "../../helpers/axios.js";
 const userController = require("../../controllers/userControllers");
 const doctorController = require("../../controllers/doctorControllers");
+import fetchFutureAppointments from ("../../views/userView/myAppointment.js");
 
 
 export function render() {
@@ -15,6 +16,7 @@ export function render() {
                 <th>email</th>
                 <th>phone</th>
                 <th>Date of Birth</th>
+                <th>Appointment</th>
                 <th>Role</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -80,6 +82,7 @@ export function render() {
                 <td>${user.Fname} &${user.Lname}</td>
                 <td>${user.email}</td>
                 <td>${user.phone}</td>
+                <td><a href="fetchFutureAppointments(user.idNumber)">Appointments</a></td>
                 <td>${new Date(user.DateOfBirth).toLocaleDateString()}</td>
                 <td>${user.role}</td>
                 <td><a href="openEditCardUser(user.idNumber)">Edit</a></td>
