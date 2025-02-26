@@ -37,7 +37,7 @@ function renderAppointments(appointments) {
         apptCard.classList.add("appointment-card");
         apptCard.innerHTML = `
             <p><strong>Doctor:</strong> ${appt.doctor}</p>
-            <p><strong>Specialty:</strong> ${appt.specialty}</p>
+            <p><strong>Experties:</strong> ${appt.experties}</p>
             <p><strong>Date:</strong> ${new Date(appt.date).toLocaleDateString()}</p>
             <p><strong>Time:</strong> ${appt.time}</p>
             <p><strong>Status:</strong> ${appt.status}</p>
