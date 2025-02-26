@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
-const Expertise = require("../models/expertiseModel")
-const Location = require("../models/locationModel")
+const Expertise = require("../models/expertiseModel");
+const Location = require("../models/locationModel");
 const Role = require("../models/roleModel");
-const Doctor = require("../models/doctorModel"); // Consistent casing
-const ChatLog = require("../models/chatLogModel"); // Adjust the path and casing as needed
+const Doctor = require("../models/doctorModel");
+const ChatLog = require("../models/chatLogModel");
 
 /**
  * Creates an empty ChatLog for a given user if one doesn't exist.
@@ -33,6 +32,7 @@ async function seedUsers() {
     const adminRole = await Role.findOne({ roleName: "admin" });
     const userRole = await Role.findOne({ roleName: "user" });
     const doctorRole = await Role.findOne({ roleName: "doctor" });
+
     if (!adminRole || !userRole || !doctorRole) {
       console.warn("One or more roles not found. Please run seedRoles first.");
       return;
@@ -89,7 +89,6 @@ async function seedUsers() {
     for (const userData of normalUsers) {
       let user = await User.findOne({ email: userData.email });
       if (!user) {
-        userData.password = userData.password;
         user = await User.create(userData);
         console.log(`✅ Normal user seeded: ${userData.email}`);
         await createEmptyChatLog(user);
@@ -99,13 +98,20 @@ async function seedUsers() {
     }
 
     // ----- Seed Doctor Users -----
-    // Reference IDs for expertise and location (ensure these exist in your DB)
-    const expertiseId = new mongoose.Types.ObjectId("67be1caeabf4e58831b39682")
-    const locationId = new mongoose.Types.ObjectId("67be1caeabf4e58831b39682");
+    // First, fetch a random Expertise document and a random Location document from the DB.
+    // You can fetch multiple random items if you want variety among doctors;
+    // here, for simplicity, we fetch just one random Expertise and one random Location,
+    // and use them for all doctors.
+    const [randomExpertise] = await Expertise.aggregate([{ $sample: { size: 1 } }]);
+    const [randomLocation] = await Location.aggregate([{ $sample: { size: 1 } }]);
+
+    if (!randomExpertise || !randomLocation) {
+      console.warn("No Expertise or Location found in the database. Please seed them first.");
+      return;
+    }
 
     const doctors = [
       {
-        // Doctor 1
         user: {
           Fname: "John",
           Lname: "Doe",
@@ -118,8 +124,8 @@ async function seedUsers() {
           roleId: doctorRole._id,
         },
         doctorDetails: {
-          expertise: expertiseId,
-          location: locationId,
+          expertise: randomExpertise._id,
+          location: randomLocation._id,
           workingTime: [
             { day: "Monday", start_time: "09:00", end_time: "17:00" },
             { day: "Wednesday", start_time: "10:00", end_time: "18:00" },
@@ -127,7 +133,6 @@ async function seedUsers() {
         },
       },
       {
-        // Doctor 2
         user: {
           Fname: "Alice",
           Lname: "Smith",
@@ -140,8 +145,8 @@ async function seedUsers() {
           roleId: doctorRole._id,
         },
         doctorDetails: {
-          expertise: expertiseId,
-          location: locationId,
+          expertise: randomExpertise._id,
+          location: randomLocation._id,
           workingTime: [
             { day: "Monday", start_time: "08:00", end_time: "16:00" },
             { day: "Tuesday", start_time: "09:00", end_time: "17:00" },
@@ -149,7 +154,6 @@ async function seedUsers() {
         },
       },
       {
-        // Doctor 3
         user: {
           Fname: "Bob",
           Lname: "Johnson",
@@ -162,8 +166,8 @@ async function seedUsers() {
           roleId: doctorRole._id,
         },
         doctorDetails: {
-          expertise: expertiseId,
-          location: locationId,
+          expertise: randomExpertise._id,
+          location: randomLocation._id,
           workingTime: [
             { day: "Tuesday", start_time: "10:00", end_time: "18:00" },
             { day: "Thursday", start_time: "09:00", end_time: "17:00" },
@@ -175,7 +179,6 @@ async function seedUsers() {
     for (const entry of doctors) {
       let doctorUser = await User.findOne({ email: entry.user.email });
       if (!doctorUser) {
-        entry.user.password = entry.user.password;
         doctorUser = await User.create(entry.user);
         console.log(`✅ Doctor seeded: ${entry.user.email}`);
         await Doctor.create({

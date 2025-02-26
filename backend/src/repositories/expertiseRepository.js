@@ -9,6 +9,11 @@ class ExpertiseRepository {
     return await Expertise.findById(id);
   }
 
+  async getAllExpertiseNames() {
+    const expertiseList = await Expertise.find({}, "name");
+    return expertiseList.map((exp) => exp.name); 
+  }
+
 
   async findAll() {
     return await Expertise.find({});
