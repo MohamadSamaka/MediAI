@@ -18,6 +18,12 @@ class LocationService {
     return await LocationRepository.findAll();
   }
 
+async closestLocation(locationId){
+  locations= await LocationRepository();
+  
+  return 
+}
+
   async updateLocation(id, data) {
     validateLocationUpdate(data);
     const location = await LocationRepository.update(id, data);

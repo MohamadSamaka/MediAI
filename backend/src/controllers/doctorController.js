@@ -64,6 +64,7 @@ class DoctorController {
     }
   }
 
+  //I dont think we need this
   async getFirstAvailableAppointment(req, res, next) {
     try {
       const appointment = await doctorService.getFirstAvailableAppointment(req.params.doctorId);

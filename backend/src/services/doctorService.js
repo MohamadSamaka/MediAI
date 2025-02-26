@@ -79,9 +79,7 @@ class DoctorService {
 
 
 
-  async getFirstAvailableAppointments(doctorId) {
-    return await doctorRepository.getFirstAvailableAppointments(doctorId);
-  }
+  
 }
 
 module.exports = new DoctorService();
