@@ -1,4 +1,4 @@
-import { loadStyles } from "../../helpers/stylesManager.js";
+import { loadStyles } from "/js/helpers/stylesManager.js";
 
 export function render() {
   return `
