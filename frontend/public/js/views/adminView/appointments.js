@@ -18,11 +18,12 @@ export function render() {
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Time</th>
                 <th>Location</th>
                 <th>Doctor</th>
                 <th>Specialty</th>
-                <th>book</th>
+                <th>Patient</th>
+                <th>status</th>
+                <th>edit</th>
             </tr>
         </thead>
         <tbody id="appointments-table-body">
