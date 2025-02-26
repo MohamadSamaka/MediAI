@@ -44,7 +44,7 @@ export const routes = [
     ],
   },
   {
-    pattern: "/chat",
+    pattern: "/chatbot",
     loader: () => import("/js/views/AIChat.js"),
     styles: [
       {

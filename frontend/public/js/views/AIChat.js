@@ -1,4 +1,5 @@
-import { loadStyles } from "../helpers/stylesManager.js";
+import { loadStyles } from "/js/helpers/stylesManager.js";
+import { sendMessage } from "/js/api/chatbotAPI.js";
 
 export function render() {
   return `
@@ -10,7 +11,7 @@ export function render() {
       <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <!-- Toggle Sidebar Button -->
-          <a href="../index/index.html"
+          <a href="/"
             ><button class="home-btn" id="home-icon">
               <i class="fa-solid fa-house"></i></button
           ></a>
@@ -88,14 +89,8 @@ export function init(styles, params) {
     // New function that sends the user's message to the server.
     async function sendToServer(message) {
       try {
-        const response = await fetch("http://localhost:5000/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message }),
-        });
-        const data = await response.json();
+        const data =  await sendMessage(message)
+        console.log(data)
         if (data.error) {
           appendMessage("Error: " + data.error, "bot");
         } else {

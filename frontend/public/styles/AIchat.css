@@ -244,3 +244,7 @@ body {
 #home-icon:hover {
   background: #125777;
 }
+
+#header{
+  display: none;
+}
