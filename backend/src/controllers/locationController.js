@@ -1,4 +1,5 @@
 const LocationService = require("../services/locationService");
+const LocationRepository= require("../repositories/locationRepository");
 
 class LocationController {
   async create(req, res, next) {
@@ -27,6 +28,28 @@ class LocationController {
       next(error);
     }
   }
+
+
+  async getClosestLocations(req, res, next) {
+    try {
+        const locationId = req.params.locationId;
+
+        // Find the reference location by ID
+        const location = await LocationRepository.findLocationByName({ _id: locationId });
+
+        if (!location) {
+            return res.status(404).json({ error: "Location not found" });
+        }
+
+        // Get sorted closest locations' IDs
+        const sortedLocationIds = await LocationRepository.getClosestLocationIds(location.locationName);
+
+        res.json({ sortedLocationIds });
+    } catch (error) {
+        next(error)
+    }
+}
+
 
   async update(req, res, next) {
     try {

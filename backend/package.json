@@ -12,11 +12,11 @@
     "db:getExpertise": "node src/scripts/getAllExpertise.js",
     "db:getRoles": "node src/scripts/getAllRoles.js",
     "db:getLocs": "node src/scripts/getAllLocations.js"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.8.1",
     "bcryptjs": "^3.0.1",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",

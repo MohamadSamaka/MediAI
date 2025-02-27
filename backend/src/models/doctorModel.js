@@ -72,6 +72,5 @@ doctorSchema.pre("save", function (next) {
 });
 
 // **Fix: Prevent Overwriting the Model**
-const Doctor = mongoose.models.Doctor || mongoose.model("Doctor", doctorSchema);
+module.exports = mongoose.model("Doctor", doctorSchema);
 
-module.exports = Doctor;

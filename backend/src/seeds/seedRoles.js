@@ -1,20 +1,21 @@
-// src/seeds/seedRoles.js
-
 const Role = require('../models/roleModel');
 
-/**
- * Seeds default roles in the DB if they don't already exist.
- */
 async function seedRoles() {
-  const defaultRoles = ['admin', 'patient', 'doctor'];
-
-  for (const roleName of defaultRoles) {
-    // Check if this role already exists
-    const existingRole = await Role.findOne( {roleName: roleName});
-    if (!existingRole) {
-      await Role.create({ roleName: roleName });
-      console.log(`Seeded role: ${roleName}`);
+  try {
+    console.log("Seeding Roles...");
+    const defaultRoles = ['admin', 'user', 'doctor'];
+    for (const roleName of defaultRoles) {
+      const existingRole = await Role.findOne({ roleName });
+      if (!existingRole) {
+        await Role.create({ roleName });
+        console.log(`✅ Role seeded: ${roleName}`);
+      } else {
+        console.log(`ℹ️  Role already exists: ${roleName}`);
+      }
     }
+  } catch (error) {
+    console.error("❌ Error seeding roles:", error);
+    throw error;
   }
 }
 

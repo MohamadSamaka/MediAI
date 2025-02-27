@@ -14,7 +14,7 @@ const hospitalSchema = new mongoose.Schema(
     // Reference to a Locations document
     location: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Locations",
+      ref: "Location",
       required: true,
     },
     // Array of doctor references associated with this hospital

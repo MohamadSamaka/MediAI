@@ -18,4 +18,5 @@ LocationRouter.delete("/:id", (req, res, next) =>
   LocationController.delete(req, res, next)
 );
 
+
 module.exports = LocationRouter;
