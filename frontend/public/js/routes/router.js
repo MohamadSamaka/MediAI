@@ -2,6 +2,12 @@ export const routes = [
   {
     pattern: "/",
     loader: () => import("/js/views/home.js"),
+    styles: [
+      {
+        href: "/styles/home.css",
+        id: "homeStyles"
+      },
+    ],
   },
   {
     pattern: "/about",

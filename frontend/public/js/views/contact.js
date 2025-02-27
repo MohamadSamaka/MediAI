@@ -41,7 +41,7 @@ export function render() {
           communication and service delivery. Reach out today to start the
           conversation!
         </p>
-        <img src="../../public/imgs/logo_2.png" alt= />
+        <img src="/assets/imgs/logo_2.png" alt= />
       </div>
       <div class="contact-right">
         <form action="#" method="post">
