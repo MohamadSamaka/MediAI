@@ -2,10 +2,6 @@ import { loadStyles } from "../helpers/stylesManager.js";
 
 export function render() {
   return `
-<<<<<<< HEAD
-      <h2>Contact</h2>
-      <p>Contact us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
-=======
     <div class="info-container">
       <div class="info-box">
         <!-- You can replace the img src with an actual icon -->
@@ -79,7 +75,6 @@ export function render() {
         </form>
       </div>
     </div>
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
     `;
 }
 

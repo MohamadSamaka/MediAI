@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import axios from 'https://cdn.skypack.dev/axios?min';
-
-const port = "3001"
-const baseURL = `http://localhost:${port}/api`
-
-const axiosInstance = axios.create({
-  baseURL: baseURL,
-  timeout: 5000,                       
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true // Ensures cookies (like the refresh token) are sent
-});
-
-
- 
-=======
 import axios from "https://cdn.skypack.dev/axios?min";
 
 const port = "3001";
@@ -76,6 +60,5 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 
 export default axiosInstance;

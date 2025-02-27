@@ -1,17 +1,6 @@
 import { loadStyles } from "../helpers/stylesManager.js";
 import { login } from "../api/authAPI.js";
 
-<<<<<<< HEAD
-
-export function render() {
-  return `
-    <form id="userForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="admin@example.com"><br><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" value="AdminPass123"><br><br>
-    <input type="button" value="Submit" id="submit-btn">  </form>
-=======
 export function render() {
   return `
       <div class="main-container">
@@ -57,24 +46,10 @@ export function render() {
       </div>
     </div>
 
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
     `;
 }
 
 export function init(styles, params) {
-<<<<<<< HEAD
-  function submitForm() {
-    const formData = {
-      email: document.getElementById('email').value,
-      password: document.getElementById('password').value,
-    };
-  
-    login(formData)
-  }
-
-  document.querySelector("#submit-btn").addEventListener("click", submitForm)
-  
-=======
 
   // document.querySelector("#submit-btn").addEventListener("click", submitForm)
   const loginForm = document.getElementById("loginForm");
@@ -106,6 +81,5 @@ export function init(styles, params) {
     }
   });
 
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   loadStyles(styles);
 }

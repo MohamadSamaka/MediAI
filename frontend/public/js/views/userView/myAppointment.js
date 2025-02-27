@@ -1,4 +1,6 @@
 import { loadStyles } from "/js/helpers/stylesManager.js";
+import {myAppointments} from "/js/api/userAPI.js";
+
 
 export function render() {
   return `
@@ -7,11 +9,12 @@ export function render() {
     `;
 }
 
+
 async function fetchFutureAppointments(user) {
     try {
        // i need the user get the appointments function name user
-        const appointments = [];
-
+        const appointments = myAppointments(user._id);
+        console.log(appointments)
         // Filter future appointments
         const now = new Date();
         const futureAppointments = appointments.filter(appt => new Date(appt.date) > now);

@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import axiosInstance from './index.js';
-
-
-export function getUsers() {
-  return axiosInstance.get('/'); 
-}
-
-export function createUser(userData) {
-  return axiosInstance.post('/users', userData);
-}
-
-export function updateUser(userId, userData) {
-  return axiosInstance.put(`/users/${userId}`, userData);
-}
-
-export function deleteUser(userId) {
-  return axiosInstance.delete(`/users/${userId}`);
-=======
 import axiosInstance from "./index.js";
 
 export async function getUsers() {
@@ -24,6 +5,13 @@ export async function getUsers() {
     withCredentials: true,
   });
 }
+
+export async function getUserById(userId) {
+  return await axiosInstance.get("/user/:id", userId, {
+    withCredentials: true,
+  });
+}
+
 
 export async function createUser(userData) {
   try {
@@ -40,6 +28,14 @@ export async function createUser(userData) {
   }
 }
 
+export async function myAppointments(userId) {
+  return await axiosInstance.get(`/protected/appointment/${userId}`,{
+    withCredentials: true,
+  });
+}
+
+
+
 export async function updateUser(userId, userData) {
   return await axiosInstance.put(`/admin/user/${userId}`, userData, {
     withCredentials: true,
@@ -50,5 +46,4 @@ export async function deleteUser(userId) {
   return await axiosInstance.delete(`/admin/user/${userId}`, {
     withCredentials: true,
   });
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 }

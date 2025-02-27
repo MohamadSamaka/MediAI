@@ -5,9 +5,6 @@ export const routes = [
   },
   {
     pattern: "/about",
-<<<<<<< HEAD
-    loader: () => import("/js/views/about.js"),  },
-=======
     loader: () => import("/js/views/about.js"),
     styles: [
       {
@@ -76,7 +73,6 @@ export const routes = [
       },
     ],
   },
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 
   {
     pattern: "/users/:userId",
@@ -85,33 +81,16 @@ export const routes = [
   {
     pattern: "/contact",
     loader: () => import("/js/views/contact.js"),
-<<<<<<< HEAD
-=======
     styles: [
       {
         href: "/styles/contact.css",
         id: "contactStyles", //the name of the id doesn't matter, what's important is that it has to be unique
       },
     ],
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   },
   {
     pattern: "/login",
     loader: () => import("/js/views/login.js"),
-<<<<<<< HEAD
-  },
-  {
-    pattern: "/registration",
-    loader: () => import("/js/views/registration.js"),
-    styles: [{href: "../styles/registration.css", id: "registrationStyles"}]
-  },
-  ,
-  {//this has to be the last one
-    pattern: "*",
-    loader: () => import("/js/views/notFound.js"),
-  },
-
-=======
     styles: [
       {
         href: "/styles/login.css",
@@ -123,7 +102,6 @@ export const routes = [
     pattern: "*",
     loader: () => import("/js/views/notFound.js"),
   },
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 ];
 
 function matchRoute(pattern, pathname) {
@@ -183,11 +161,7 @@ function resolveRoute(pathname) {
   return {
     loader: fallback.loader,
     params: {},
-<<<<<<< HEAD
-    styles: fallback.styles || []
-=======
     styles: fallback.styles || [],
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   };
 }
 
@@ -229,11 +203,6 @@ document.addEventListener("click", (event) => {
 export function navigateTo(path) {
   // Update the browser's URL without reloading the page.
   window.history.pushState({}, "", window.location.origin + path);
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   // Render the view for the new path.
   renderView(path);
 }

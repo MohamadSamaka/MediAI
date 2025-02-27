@@ -2,10 +2,6 @@ import { loadStyles } from "../helpers/stylesManager.js";
 
 export function render() {
   return `
-<<<<<<< HEAD
-      <h2>About</h2>
-      <p>This is an advanced example that uses a fixed layout with dynamic content.</p>
-=======
       <div class="container">
       <h1 id="title-about">About MedicalAI</h1>
      
@@ -46,7 +42,6 @@ export function render() {
         </p>
       </div>
     </div>
->>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
     `;
 }
 
