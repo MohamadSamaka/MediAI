@@ -15,6 +15,11 @@ class ChatBotService {
     await chatlogRepository.addChatSession(userId, sessionData);
   }
 
+  async getUserChatLog(userId) {
+    const chatLogs = await chatlogRepository.getChatSessionByUserId(userId);
+    return chatLogs
+  }
+
   /**
    * Sends a message to ChatGPT with user context and expertise information.
    * @param {object} reqUser - The user object (contains ID, name, etc.).
@@ -23,19 +28,11 @@ class ChatBotService {
    */
   async sendMessageToChatGPT(reqUser, userMessageData) {
     try {
-      const chatLogs = await chatlogRepository.getChatSessionByUserId(reqUser.id);
+      const chatLogs = this.getUserChatLog(reqUser.id);
       const expertiseList = await expertiseRepository.getAllExpertiseNames();
 
-      // Format chat logs (flattening the array and keeping only necessary fields)
-      const formattedChatLogs = chatLogs?.flatMap((log) =>
-        log.chat_session.map((session) => ({
-          user_message: session.user_message,
-          ai_response: session.ai_response,
-        }))
-      ) || [];
-
       // Generate system prompt using the provided function
-      const systemPrompt = systemPromptGenerator(formattedChatLogs, expertiseList);
+      const systemPrompt = systemPromptGenerator(chatLogs, expertiseList);
 
       // Construct the final message
       const fullMessage = `${reqUser.Fname} ${reqUser.Lname}: ${userMessageData.message}\n\nSystem Prompt:\n${systemPrompt}`;
