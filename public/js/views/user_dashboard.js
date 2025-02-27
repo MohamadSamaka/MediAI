@@ -1,3 +1,13 @@
+//  ===== same as doctor_dashboard.js =====
+// const fakeAppointments = [
+//   {
+//     date: "2025-04-15",
+//     time: "10:00 AM",
+//     location: "Room 101",
+//     doctor: "Dr. Smith",
+//     description: "General check-up appointment.",
+//   },
+
 import { loadStyles } from "../helpers/stylesManager.js";
 
 export function render() {
@@ -106,7 +116,7 @@ export function render() {
             <div
               id="aiChatSection"
               class="dashboard-section"
-              onclick="window.location.href='../../pages/ai_consultation.html';"
+              onclick="window.location.href='http://localhost:3000/AIchat';"
             >
               <div
                 class="section-header"
@@ -123,86 +133,66 @@ export function render() {
                 </div>
               </div>
               <div class="section-content">
-                <ul style="list-style: none; padding-left: 0">
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Medical Consultation:</strong> Get expert advice on
-                    your health concerns instantly.
+                <ul style="list-style: none;">
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong style="margin-left: 5px;">Medical Consultation:</strong> Get expert advice on your health concerns instantly.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Cutting-Edge Technology:</strong> Our AI leverages
-                    the latest advancements in medical technology.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Cutting-Edge Technology:</strong> Our AI leverages the latest advancements in medical technology.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Medication Management:</strong> Organize your
-                    prescriptions and dosage schedules effortlessly.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Medication Management:</strong> Organize your prescriptions and dosage schedules effortlessly.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Health Records:</strong> Securely access and update
-                    your medical history and test results.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Health Records:</strong> Securely access and update your medical history and test results.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Secure Communication:</strong> Enjoy private,
-                    encrypted conversations exclusively with your AI bot.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Secure Communication:</strong> Enjoy private, encrypted conversations exclusively with your AI bot.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Health Insights:</strong> Receive personalized tips
-                    and trends to enhance your well-being.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Health Insights:</strong> Receive personalized tips and trends to enhance your well-being.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Emergency Support:</strong> 24/7 immediate
-                    assistance during critical moments.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Emergency Support:</strong> 24/7 immediate assistance during critical moments.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Expert Medical Knowledge:</strong> Powered by AI
-                    trained on extensive medical expertise.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Expert Medical Knowledge:</strong> Powered by AI trained on extensive medical expertise.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Instant Replies:</strong> Get prompt responses
-                    without waiting for hours or days.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Instant Replies:</strong> Get prompt responses without waiting for hours or days.
                   </li>
-                  <li>
-                    <i
-                      class="fa-solid fa-check check-icon"
-                      style="color: rgb(255, 255, 255); margin-right: 5px"
-                    ></i>
-                    <strong>Trusted by Top Institutions:</strong> Utilized by
-                    some of the largest medical institutions in Israel.
+                  <li style="display: flex; align-items: center;">
+                    <div class="circle-bg" style="margin-right: 10px;">
+                      <i class="fa-solid fa-check check-icon" style="color: rgb(255, 255, 255);"></i>
+                    </div>
+                    <strong>Trusted by Top Institutions:</strong> Utilized by some of the largest medical institutions in Israel.
                   </li>
                 </ul>
               </div>
@@ -356,7 +346,7 @@ export function render() {
                           <!-- Load the translator script -->
     <script src="../../translator.js"></script>
 
-              <a href="../../pages/appointment/at.html"><button>See Appointments</button>
+              <a href=""><button>See Appointments</button>
             </div></a>
 
     
@@ -703,7 +693,7 @@ export function init(styles, params) {
 
   // ------------------- IMPORT COMPONENTS --------------------
   function load_components() {
-    const arr_components = ["topbar", "footer", "sidebar", "second-topbar"];
+    const arr_components = ["topbar", "footer", "sidebar", "topbar-sub"];
     for (let i = 0; i < arr_components.length; i++) {
       let path = "./js/" + path_components + arr_components[i] + ".html";
       let name = arr_components[i];

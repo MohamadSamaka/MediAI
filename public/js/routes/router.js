@@ -9,6 +9,50 @@ export const routes = [
       },
     ],
   },
+
+  {
+    pattern: "/AIchat",
+    loader: () => import("/js/views/AIChat.js"),
+    styles: [
+      {
+        href: "/styles/AIchat.css",
+        id: "AIchat123",
+      },
+    ],
+  },
+
+  {
+    pattern: "/admin_dashboard",
+    loader: () => import("/js/views/admin_dashboard.js"),
+    styles: [
+      {
+        href: "/styles/admin_dashboard.css",
+        id: "admin_dashboard123",
+      },
+    ],
+  },
+
+  {
+    pattern: "/doctor_dashboard",
+    loader: () => import("/js/views/doctor_dashboard.js"),
+    styles: [
+      {
+        href: "/styles/doctor_dashboard.css",
+        id: "doctor_dashboard123",
+      },
+    ],
+  },
+  {
+    pattern: "/user_dashboard",
+    loader: () => import("/js/views/user_dashboard.js"),
+    styles: [
+      {
+        href: "/styles/user_dashboard.css",
+        id: "user_dashboard123",
+      },
+    ],
+  },
+
   {
     pattern: "/about",
     loader: () => import("/js/views/about.js"),
@@ -56,6 +100,17 @@ export const routes = [
       {
         href: "/styles/ceatingUserDashboard.css",
         id: "ceatingUserDashboard", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
+  },
+
+  {
+    pattern: "/appointment",
+    loader: () => import("/js/views/appointment.js"),
+    styles: [
+      {
+        href: "/styles/appointment.css",
+        id: "appointment123", //the name of the id doesn't matter, what's important is that it has to be unique
       },
     ],
   },

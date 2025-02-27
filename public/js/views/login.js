@@ -3,7 +3,7 @@ import { login } from "../api/authAPI.js";
 
 export function render() {
   return `
-      <div class="main-container">
+      <div class="main-container-login">
       <!-- Left Side: Title and Description -->
       <div class="left-panel">
         <h1>MedicAI</h1>
@@ -50,7 +50,6 @@ export function render() {
 }
 
 export function init(styles, params) {
-
   // document.querySelector("#submit-btn").addEventListener("click", submitForm)
   const loginForm = document.getElementById("loginForm");
   const messageEl = document.getElementById("message");

@@ -9,6 +9,7 @@ body {
   align-items: stretch;
   height: 100vh;
   width: 100vw;
+  margin-top: 100px;
 }
 /* Left container (Navbar) styling */
 .container-left {
@@ -183,19 +184,20 @@ body {
   background: #3e94a0;
 }
 
-.check-icon {
-  background-color: green; /* Green background */
-  border-radius: 50%; /* Fully rounded (circle) */
-  color: white; /* White icon color */
-  display: inline-flex; /* Inline-flex for proper alignment */
-  align-items: center;
+.circle-bg {
+  display: flex;
   justify-content: center;
-  width: 20px; /* Fixed width */
-  height: 20px; /* Fixed height */
-  margin-right: 5px; /* Space between icon and text */
-  font-size: 12px; /* Adjust icon size as needed */
+  align-items: center;
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Same as width to create a perfect circle */
+  background-color: #4caf50; /* Circle background color (green in this case) */
+  border-radius: 50%; /* Makes the div circular */
 }
 
+.check-icon {
+  color: white; /* Icon color */
+  font-size: 15px; /* Adjust the icon size as needed */
+}
 #aiChatSection {
   /* background: #000; */
 }

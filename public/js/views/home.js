@@ -33,7 +33,7 @@ export function render() {
     
 
     <!-- Load the translator script -->
-    <script src="../../translator.js"></script>
+    <script src="./js/api/translator.js"></script>
   `;
 }
 
@@ -47,7 +47,7 @@ export function init(styles, params) {
   // ---------------- IMPORT SECTIONS/PARTS ------------
   function load_sections() {
     console.log("=======");
-    const arr_sections = ["1", "2", "3", "4", "5", "6", "7"];
+    const arr_sections = ["1", "2", "4", "5", "7"];
     for (let i = 0; i < arr_sections.length; i++) {
       let path =
         "./js/" +

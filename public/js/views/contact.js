@@ -6,9 +6,13 @@ export function render() {
      <!------------- TOPBAR --------------->
     <div class="topbar" id="topbar"></div>
     <div class="line-temp"></div>
+      
+         <div class="space-down" style="margin-top: 140px;"></div>
+     <h1 style="text-align: center;">Contact Us</h1>
 <div class="header">
-      <h1>Contact Us</h1>
+    
     </div>
+    
     <div class="info-container">
       <div class="info-box">
         <!-- You can replace the img src with an actual icon -->
@@ -48,7 +52,7 @@ export function render() {
           communication and service delivery. Reach out today to start the
           conversation!
         </p>
-        <img src="../../public/imgs/logo_2.png" alt= />
+        <img src="./assests/imgs/logo_2.png" alt= />
       </div>
       <div class="contact-right">
         <form action="#" method="post">

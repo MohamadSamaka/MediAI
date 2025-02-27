@@ -1,8 +1,108 @@
+//// ======= FAKE DATA  APPOINTMETS, USERS (patients) =======
+// Sample appointment data (simulated for demonstration)
+// const appointments = [
+//   {
+//     id: 1,
+//     experties: "Cardiology",
+//     location: "Room 101",
+//     dateTime: "2025-03-01T10:00:00",
+//     status: true,
+//     patientName: "John Doe",
+//   },
+
+// ];
+
+// // Sample patient data (simulated for demonstration)
+// const patients = [
+//   {
+//     id: 1,
+//     Fname: "John",
+//     Lname: "Doe",
+//     email: "john.doe@example.com",
+//     phone: "123-456-7890",
+//   },
+
+// ];
+
+//// ======= SAME LIKE EXMAPLE IN admin_dashboard.JS ABOVE =======
+
+// GET APPOINTMENTS OF CURRENT DOCTOR (CURRENT USER),
+
+// // INIT appointments and patients arrays
+// appointments = []
+// patients = []
+
+// // LOOP OVER ALL appointments OF THE DOCTOR, AND FILL THE 2 ARRAYS:
+
+// let doctor_appointments = get_doctor_appointments(); // array
+// let id = 1;
+// doctor_appointments.forEach((a)=>{
+
+//     // fill appointments ITEMS
+//     appointments.push({
+//       id:id,
+//       experties:a.experties,
+//       location:a.location,
+//       dateTime:a.dateTime,
+//       status:true,
+//       patient:a.patient.Fname + a.patient.Lname,
+//     })
+
+//     // fill PATIESTS ITEMS
+//     patients.push({
+//       id:id,
+//           Fname: a.patient.Fname,
+//           Lname: a.patient.Lname,
+//           email: a.patient.email,
+//           phone: a.patient.phone,
+//     })
+
+//     id++;
+
+// })
+
 import { loadStyles } from "../helpers/stylesManager.js";
 
 export function render() {
   return `
-      <h2>From user dashboard</h2>
+        <!------------- TOPBAR --------------->
+    <div class="topbar-sub" id="topbar-sub"></div>
+    <div class="line-temp"></div>
+
+    <!-- Topbar -->
+    <div id="topbar-dash">Doctor Dashboard</div>
+    <div class="container">
+      <!-- Left Sidebar -->
+      <div class="container-left">
+        <nav class="navbar">
+          <ul id="navbarList">
+            <li>
+              <a href="#" onclick="showAppointments()"
+                ><i class="fa-solid fa-calendar-check"></i> Appointments</a
+              >
+            </li>
+            <li>
+              <a href="#" onclick="showSearchPatient()"
+                ><i class="fa-solid fa-user"></i> Search Patient</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Right Content Area -->
+      <div class="container-right">
+        <div id="dashboardContent" class="dashboard">
+          <!-- Dynamic content loads here -->
+        </div>
+      </div>
+    </div>
+
+
+        <!------------- FOOTER --------------->
+        <div class="footer" id="footer">
+
+                      <!-- Load the translator script -->
+    <script src="../../translator.js"></script>
     `;
 }
 
@@ -224,7 +324,13 @@ export function init(styles, params) {
 
   // ------------------- IMPORT COMPONENTS --------------------
   function load_components() {
-    const arr_components = ["topbar", "footer", "sidebar", "second-topbar"];
+    const arr_components = [
+      "topbar",
+      "footer",
+      "sidebar",
+      "second-topbar",
+      "topbar-sub",
+    ];
     for (let i = 0; i < arr_components.length; i++) {
       let path = "./js/" + path_components + arr_components[i] + ".html";
       let name = arr_components[i];
@@ -263,6 +369,6 @@ export function init(styles, params) {
 
   // Ensure the DOM is fully loaded before importing components and sections
 
-  load_sections();
+  // load_sections();
   load_components();
 }

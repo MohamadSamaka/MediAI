@@ -1,3 +1,42 @@
+///
+
+//  ====== FAKE DATA LOOKS LIKE THIS ======
+// const users = [
+//   {
+//     id: 1,
+//     name: "John Doe",
+//     role: "Patient",
+//     email: "john.doe@example.com",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     role: "Doctor",
+//     email: "jane.smith@example.com",
+//   },
+//   {
+//     id: 3,
+//     name: "Admin User",
+//     role: "Admin",
+//     email: "admin.user@example.com",
+//   },
+// ];
+
+// ======= SO U NEED ONLY TO GET: =========
+// 1. ALL USERS FROM MONGODB
+// 2. EXTRACT name,role,email.
+// 3. REPLACE users array with new array where you put the informaiton from real data
+
+// -- for example:
+
+// users = [] // init array fake data
+// let real_users = get_all_users()
+// real_users.forEach((u)=>{
+//  users.push({id,u.name,u.role,u.email})
+//})
+
+// NOW YOU HAVE REPLACED FAKE DATA WITH REAL ONES
+
 import { loadStyles } from "../helpers/stylesManager.js";
 
 export function render() {
@@ -208,26 +247,32 @@ export function init(styles, params) {
   const path_components = "components/";
   const sections_folder = "main_sections/";
 
-  // ---------------- IMPORT SECTIONS/PARTS ------------
-  function load_sections() {
-    console.log("=======");
-    const arr_sections = ["1", "2", "3", "4", "5", "6", "7"];
-    for (let i = 0; i < arr_sections.length; i++) {
-      let path =
-        "./js/" +
-        path_components +
-        sections_folder +
-        "s" +
-        arr_sections[i] +
-        ".html";
-      let name = "section-section" + arr_sections[i];
-      import_html(path, name);
-    }
-  }
+  // // ---------------- IMPORT SECTIONS/PARTS ------------
+  // function load_sections() {
+  //   console.log("=======");
+  //   const arr_sections = ["1", "2", "3", "4", "5", "6", "7"];
+  //   for (let i = 0; i < arr_sections.length; i++) {
+  //     let path =
+  //       "./js/" +
+  //       path_components +
+  //       sections_folder +
+  //       "s" +
+  //       arr_sections[i] +
+  //       ".html";
+  //     let name = "section-section" + arr_sections[i];
+  //     // import_html(path, name);
+  //   }
+  // }
 
   // ------------------- IMPORT COMPONENTS --------------------
   function load_components() {
-    const arr_components = ["topbar", "footer", "sidebar", "second-topbar"];
+    const arr_components = [
+      "topbar",
+      "footer",
+      "sidebar",
+      "second-topbar",
+      "topbar-sub",
+    ];
     for (let i = 0; i < arr_components.length; i++) {
       let path = "./js/" + path_components + arr_components[i] + ".html";
       let name = arr_components[i];
@@ -266,6 +311,6 @@ export function init(styles, params) {
 
   // Ensure the DOM is fully loaded before importing components and sections
 
-  load_sections();
+  // load_sections();
   load_components();
 }
