@@ -1,9 +1,20 @@
+
 const { Router } = require("express");
-const AppointmentController = require("../../controllers/appointmentController");
-const ProtectedAppointmentRouter = Router();
 
-ProtectedAppointmentRouter.post("/", (req, res, next) => AppointmentController.create(req, res, next));
-ProtectedAppointmentRouter.get("/", (req, res, next) => AppointmentController.getAll(req, res, next));
-ProtectedAppointmentRouter.delete("/:id", (req, res, next) => AppointmentController.delete(req, res, next));
+const appointmentRouter = Router();
 
-module.exports = ProtectedAppointmentRouter;
+const appointmentController = require("../../controllers/appointmentController");
+//the ids are appoinment id 
+appointmentRouter.get("/:id",(req, res)=> appointmentController.getAppointment(req, res));
+appointmentRouter.get("/",(req, res)=> appointmentController.getAllAppointments(req, res));
+
+appointmentRouter.post("/",(req, res, next)=> appointmentController.createAppointment(req, res, next));
+appointmentRouter.delete("/:id",(req, res)=> appointmentController.cancelAppointment(req, res));
+
+appointmentRouter.get("/user/:userId",(req, res) => appointmentController.getAppointmentsByUser(req, res));//user fetching his future appointments
+appointmentRouter.get("/doctor/:doctorId",(req, res)=> appointmentController.getAppointmentsByDoctor(req, res));//doctor fetching his future appointments
+
+module.exports = appointmentRouter;
+
+
+//next in controller 

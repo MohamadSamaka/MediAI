@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const Doctor = require("../models/doctorModel");
 const JsonedResponseError = require("../errors/JsonedResponseError");
 
@@ -43,7 +42,6 @@ class DoctorRepository {
       throw new Error(error.message);
     }
   }
-
   //we valdiated at appointments
   async addAppointment(doctorId, appointment) {
     return await Doctor.findByIdAndUpdate(

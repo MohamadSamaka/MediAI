@@ -9,62 +9,61 @@ class MedicalRecRepository {
   async addAppointment(userId, appointment) {
     return await MedicalRecord.findOneAndUpdate(
       { userId: userId },
-      { $push: {appointmentId: appointment } },
+      { $push: { appointmentId: appointment } },
       { new: true }
     );
   }
-
 
   async getUserAppointments(reqUser) {
     return await Appointment.find({ userId: reqUser }).sort({ dateTime: 1 });
     /*const userRecord= this.getRecordByUserId(reqUser)
     return await userRecord.appointmentId;*/
   }
-//
-
+  //
 
   async updateMedicalRecord(id, data) {
     return await MedicalRecord.findByIdAndUpdate(id, data, { new: true });
   }
-//updating future appointment list
+  //updating future appointment list
   async removePastAppointments(userId, today) {
     return await MedicalRecord.findOneAndUpdate(
       { userId },
-      { $pull: { appointmentId: { appointment_time: { $lt: today } } } }, 
+      { $pull: { appointmentId: { appointment_time: { $lt: today } } } },
       { new: true }
     );
   }
-//for canceling
+  //for canceling
   async removeAppointment(userId, appointmentId) {
     return await MedicalRecord.findOneAndUpdate(
       { userId },
-      { $pull: { appointmentId: {appointment_time, appointment_id: appointmentId } } },
+      {
+        $pull: {
+          appointmentId: { appointment_time, appointment_id: appointmentId },
+        },
+      },
       { new: true }
     );
   }
 
-
-
-
   async getPrescriptions(userId) {
     //this returns all of the medical record we need the prescreption
-    const prescriptions = await medicalRecModel.findOne({ userId }, 'prescriptions');
+    const prescriptions = await medicalRecModel.findOne(
+      { userId },
+      "prescriptions"
+    );
     return prescriptions;
   }
 
   async getDiagnosis(userId) {
     //this returns all of the medical record we need the diagnosis
-    const diagnosis = await medicalRecModel.findOne({ userId }, 'diagnosis');
+    const diagnosis = await medicalRecModel.findOne({ userId }, "diagnosis");
     return diagnosis;
   }
 
   //returns the future appointments array
-async getAppointments(userId){
-  return await medicalRecModel.findOne({ userId }, 'appointmentId');
-    
-}
-
-
+  async getAppointments(userId) {
+    return await medicalRecModel.findOne({ userId }, "appointmentId");
+  }
 }
 
 module.exports = new MedicalRecRepository();

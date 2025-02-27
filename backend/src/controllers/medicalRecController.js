@@ -42,6 +42,21 @@ class MedicalRecController {
     }
   }
 
+  async getAppointment(req, res){
+    try {
+      const userIdObj = req.user.id;
+      const prescriptions = await medicalRecService.addAppointment(userIdObj);
+      return res.status(200).json({
+        success: true,
+        data: prescriptions,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
 
 }
 

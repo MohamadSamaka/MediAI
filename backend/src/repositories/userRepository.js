@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const MedicalRecord = require("../models/medicalRecordModel");
 const ChatLog = require("../models/chatLogModel")
+// const Doctor = require("../models/doctorModel")
 const Doctor = require("../models/doctorModel")
 
 class UserRepository {
