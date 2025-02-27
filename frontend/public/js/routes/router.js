@@ -5,7 +5,78 @@ export const routes = [
   },
   {
     pattern: "/about",
+<<<<<<< HEAD
     loader: () => import("/js/views/about.js"),  },
+=======
+    loader: () => import("/js/views/about.js"),
+    styles: [
+      {
+        href: "/styles/about.css",
+        id: "aboutStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/my-appointment",
+    loader: () => import("/js/views/userView/myAppointment.js"),
+    // styles: [
+    //   {
+    //     href: "/styles/about.css",
+    //     id: "aboutStyles"
+    //   },
+    // ],
+  },
+  {
+    pattern: "/book-appointment",
+    loader: () => import("/js/views/userView/appointmentsBooking.js"),
+    // styles: [
+    //   {
+    //     href: "/styles/about.css",
+    //     id: "aboutStyles"
+    //   },
+    // ],
+  },
+  {
+    pattern: "/faq",
+    loader: () => import("/js/views/faq.js"),
+    styles: [
+      {
+        href: "/styles/faq.css",
+        id: "faqStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/chatbot",
+    loader: () => import("/js/views/AIChat.js"),
+    styles: [
+      {
+        href: "/styles/AIChat.css",
+        id: "AIChatStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/services",
+    loader: () => import("/js/views/services.js"),
+    styles: [
+      {
+        href: "/styles/services.css",
+        id: "servicesStyles"
+      },
+    ],
+  },
+  {
+    pattern: "/admin/dashboard/user",
+    loader: () => import("/js/views/adminView/creatingUser.js"),
+    styles: [
+      {
+        href: "/styles/ceatingUserDashboard.css",
+        id: "ceatingUserDashboard", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
+  },
+>>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 
   {
     pattern: "/users/:userId",
@@ -14,10 +85,20 @@ export const routes = [
   {
     pattern: "/contact",
     loader: () => import("/js/views/contact.js"),
+<<<<<<< HEAD
+=======
+    styles: [
+      {
+        href: "/styles/contact.css",
+        id: "contactStyles", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
+>>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   },
   {
     pattern: "/login",
     loader: () => import("/js/views/login.js"),
+<<<<<<< HEAD
   },
   {
     pattern: "/registration",
@@ -30,6 +111,19 @@ export const routes = [
     loader: () => import("/js/views/notFound.js"),
   },
 
+=======
+    styles: [
+      {
+        href: "/styles/login.css",
+        id: "loginStyles", //the name of the id doesn't matter, what's important is that it has to be unique
+      },
+    ],
+  },
+  {
+    pattern: "*",
+    loader: () => import("/js/views/notFound.js"),
+  },
+>>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
 ];
 
 function matchRoute(pattern, pathname) {
@@ -89,7 +183,11 @@ function resolveRoute(pathname) {
   return {
     loader: fallback.loader,
     params: {},
+<<<<<<< HEAD
     styles: fallback.styles || []
+=======
+    styles: fallback.styles || [],
+>>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   };
 }
 
@@ -131,7 +229,11 @@ document.addEventListener("click", (event) => {
 export function navigateTo(path) {
   // Update the browser's URL without reloading the page.
   window.history.pushState({}, "", window.location.origin + path);
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 3f3d0eedf098e2398cfbf1541f425ce098fb75c1
   // Render the view for the new path.
   renderView(path);
 }
